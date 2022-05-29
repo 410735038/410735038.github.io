@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           structure 結構                           前言       structure 在 C&#x2F;C++ 裡會被縮寫成 struct，但我們不討論在 C 裡面 struct 怎麼運作，我們只學 C++ 裡怎麼運作即可，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="structure 結構">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/structure-%E7%B5%90%E6%A7%8B/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           structure 結構                           前言       structure 在 C&#x2F;C++ 裡會被縮寫成 struct，但我們不討論在 C 裡面 struct 怎麼運作，我們只學 C++ 裡怎麼運作即可，而">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-05-29T09:38:37.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:38:54.359Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary"><title>structure 結構 | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/structure-%E7%B5%90%E6%A7%8B/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">structure 結構</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="structure-結構"   >
+          <a href="#structure-結構" class="heading-link"><i class="fas fa-link"></i></a><a href="#structure-結構" class="headerlink" title="structure 結構"></a>structure 結構</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>structure 在 C/C++ 裡會被縮寫成 struct，但我們不討論在 C 裡面 struct 怎麼運作，我們只學 C++ 裡怎麼運作即可，而與他非常相像的東西叫做 class，接下來的幾篇筆記會帶例子讓大家了解這兩者的差異，以及講述物件導向的基本概念。</p>
+<p>雖說大家一直說物件導向，但究竟甚麼是物件導向呢?</p>
+<p>在真的討論什麼是物件之前，我想先跟大家回到一上我們在教資料型態做的事。</p>
+<span id="more"></span>
+
+
+        <h2 id="資料型態"   >
+          <a href="#資料型態" class="heading-link"><i class="fas fa-link"></i></a><a href="#資料型態" class="headerlink" title="資料型態"></a>資料型態</h2>
+      <p>還記得基本的資料型態有 <code>short</code>、<code>int</code>、<code>long</code>、<code>float</code>、<code>double</code>、<code>bool</code>、<code>char</code>，甚麼樣資料型態的變數存甚麼樣的資料，我想這大家並不陌生。<br>可能隨著我們的需求變多，會使用到 <code>陣列 []</code>、<code>vector</code>、<code>指標 *</code>、<code>函式 function</code>。</p>
+<p>但大家試想一下，光靠這些東西就足夠開發大家平常使用的 APP、瀏覽的網頁、遊玩的遊戲了嗎?其實是完全不夠的，真正的開發需要用到的工具遠超大家的想像。</p>
+<p>就單純以資料型態而言，光靠上述的東西完全不夠，有時候有些資料型態我們可能要<span style="color:red"><strong>自訂</strong></span>出來。</p>
+<p>這邊就不討論前端的使用者介面該怎麼辦，後端的資料庫要怎麼辦，我們就以開發這件事來看就好(其實就是寫程式啦!)</p>
+<p>所以自訂我們所需要的資料型態(工具)，就是我們要學物件導向的最開始的原因。</p>
+<blockquote>
+<p><span style="color:red"><strong>而 structure 和 class 能夠讓我們根據需求自訂資料型態</strong></span><br>[name=Orange]</p>
+</blockquote>
+
+        <h3 id="自訂資料型態-什麼意思"   >
+          <a href="#自訂資料型態-什麼意思" class="heading-link"><i class="fas fa-link"></i></a><a href="#自訂資料型態-什麼意思" class="headerlink" title="自訂資料型態?什麼意思?"></a>自訂資料型態?什麼意思?</h3>
+      <p>整數、浮點數都是一種資料型態。<br>那假設我今天想要一個資料型態叫做人類，辦的到嗎?</p>
+<blockquote>
+<p>辦的到，這個時候我們就是要定義一個 structure 或 class 叫做人類。<br>[name=Orange]</p>
+</blockquote>
+<p>那人類他一定有多種<strong>特色</strong>嘛，比方說每個人都有名字、身高、體重、性別、年齡、是否已婚、出生地、隸屬國家、月入薪水…等，非常多的特色。</p>
+<p>除了特色，人能夠做的<strong>行為/動作</strong>還非常多，比方說跑步、跳舞、煮飯、說話、玩遊戲、教書、喝水…等，非常多事情。</p>
+<p>而這些特色或是動作(行為)，我們都能夠自訂成一包資料型態，就叫做人類。</p>
+<p>這就是 structure 跟 class 做的最核心的事情，<span style="color:red"><strong>自訂資料型態</strong></span>。</p>
+<p>上面的概念你懂了，我們馬上來自訂一個 <code>人類</code> 資料型態吧!</p>
+<blockquote>
+<p>這邊有一句話希望大家開始刻在心裡，雖然你可能現在無法體會。<br><span style="color:red"><strong>類別(結構)是物件的藍圖，根據藍圖將類別(結構)實體化成物件</strong></span>。<br>這句話可以說是剛開始學物件導向的核心。<br>[name=各個大神們]</p>
+</blockquote>
+
+        <h2 id="名詞解釋"   >
+          <a href="#名詞解釋" class="heading-link"><i class="fas fa-link"></i></a><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h2>
+      <ul>
+<li>上面所說的特色，其實就是我們常說的 -&gt; <strong>Data member(成員變數，亦稱屬性，以下簡稱 member)</strong><ul>
+<li>其實就是把<strong>變數</strong>定義在自定義的資料型態內</li>
+</ul>
+</li>
+<li>上面所說的動作，就是我們常說的 -&gt; <strong>Member function(成員函式，亦稱方法)</strong><ul>
+<li>其實就是把<strong>函式</strong>定義在自定義的資料型態內</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="structure-語法認識"   >
+          <a href="#structure-語法認識" class="heading-link"><i class="fas fa-link"></i></a><a href="#structure-語法認識" class="headerlink" title="structure 語法認識"></a>structure 語法認識</h2>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">structure_name</span>&#123;</span></span><br><span class="line">    member1;</span><br><span class="line">    member2;</span><br><span class="line">    memeber3;</span><br><span class="line">    </span><br><span class="line">    member_function1;</span><br><span class="line">    member_function2;</span><br><span class="line">    member_function3;</span><br><span class="line">&#125;; <span class="comment">// &lt;- 不要忘記這個分號!!!</span></span><br></pre></td></tr></table></div></figure>
+<p><span style="color:red">在最後一個大括號後面，請記得要加上分號，這是固定語法請一定要遵守，後面的筆記會更深入談這個分號的功用。</span></p>
+<p>馬上來看個例子。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span>&#123;</span></span><br><span class="line">    string name;            <span class="comment">// member1</span></span><br><span class="line">    <span class="keyword">int</span> age;                <span class="comment">// member2</span></span><br><span class="line">    <span class="keyword">bool</span> is_marriage;       <span class="comment">// member3</span></span><br><span class="line">    <span class="keyword">double</span> weight;          <span class="comment">// member4</span></span><br><span class="line">    <span class="keyword">double</span> height;          <span class="comment">// member5</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// member_function1</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 裡面會做跑步的事</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// member_fuction2</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//裡面會做吃的事</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// member_function3</span></span><br><span class="line">    <span class="function">string <span class="title">what_you_name</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">&quot;I am&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+<p>這樣你可能會問，這樣為甚麼叫做自訂一個資料型態呢?</p>
+<p>假設今天我們需要一個<span style="color:red"><strong>整數資料型態</strong></span>變數，我們會做<code>宣告</code>、<code>附值</code>的動作。<br>那如果我們今天需要一個<span style="color:red"><strong>人類資料型態</strong></span>變數，也同樣要做<code>宣告</code>與<code>附值</code>的動作。</p>
+<p>所以透過上方的例子，我們其實自定義了一個資料型態叫做 <code>person</code>。而我們都知道無論是需要變數、陣列、指標，都需要資料型態。像下面的例子。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>; <span class="comment">//宣告並附值一個整數</span></span><br><span class="line">person p1; <span class="comment">// person 是我們的資料型態，p1 是我們的變數名稱</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="如何使用-struct"   >
+          <a href="#如何使用-struct" class="heading-link"><i class="fas fa-link"></i></a><a href="#如何使用-struct" class="headerlink" title="如何使用 struct?"></a>如何使用 struct?</h2>
+      <p>不囉嗦直接看 CODE。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span>&#123;</span></span><br><span class="line">    string name;            <span class="comment">// member1</span></span><br><span class="line">    <span class="keyword">int</span> age;                <span class="comment">// member2</span></span><br><span class="line">    <span class="keyword">bool</span> is_marriage;       <span class="comment">// member3</span></span><br><span class="line">    <span class="keyword">double</span> weight;          <span class="comment">// member4</span></span><br><span class="line">    <span class="keyword">double</span> height;          <span class="comment">// member5</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// member_function1</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 裡面會做跑步的事</span></span><br><span class="line">        cout &lt;&lt; name &lt;&lt; <span class="string">&quot; is running...&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// member_fuction2</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//裡面會做吃的事</span></span><br><span class="line">        cout &lt;&lt; name &lt;&lt; <span class="string">&quot; is eating...&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// member_function3</span></span><br><span class="line">    <span class="function">string <span class="title">what_your_name</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">&quot;I am&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    person p1;</span><br><span class="line">    p1.name = <span class="string">&quot;orange&quot;</span>; p1.age = <span class="number">21</span>; p1.is_marriage = <span class="literal">false</span>;</span><br><span class="line">    p1.weight = <span class="number">60</span>; p1.height = <span class="number">1.73</span>;</span><br><span class="line">    p1.<span class="built_in">what_your_name</span>();</span><br><span class="line">    p1.<span class="built_in">run</span>();</span><br><span class="line">    p1.<span class="built_in">eat</span>();</span><br><span class="line">    </span><br><span class="line">    person p2;</span><br><span class="line">    p2.name = <span class="string">&quot;tiffany&quot;</span>; p2.age = <span class="number">20</span>; p2.is_marriage = <span class="literal">false</span>;</span><br><span class="line">    p2.weight = <span class="number">1.6</span>; p2.height = <span class="number">50</span>;</span><br><span class="line">    p2.<span class="built_in">what_your_name</span>();</span><br><span class="line">    p2.<span class="built_in">run</span>();</span><br><span class="line">    p2.<span class="built_in">eat</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>在 main 可以看到我宣告了兩個 person ，一個叫做 p1，一個叫做 p2。<br>我想應該不難理解，他們就像 int、float、string 變數一樣，如果要使用就要宣告出來。</p>
+<p>而對我們自定義資料型態的變數，當我們把它宣告出來的這個動作就叫做實體化。</p>
+
+        <h2 id="實體化"   >
+          <a href="#實體化" class="heading-link"><i class="fas fa-link"></i></a><a href="#實體化" class="headerlink" title="實體化"></a>實體化</h2>
+      <p><span style="color:red;font-size:20px"><strong>類別(結構)是物件的藍圖，根據藍圖將類別(結構)實體化成物件</strong></span>。</p>
+<p>在上例的 28 行跟 35 行，我們宣告了 p1 跟 p2 兩個 person 變數，這個動作就叫做把類別(結構)實體化成物件。</p>
+<p>那為甚麼稱為類別(結構)藍圖呢?<br><span style="color:red"><strong>藍圖只是一個規格</strong></span>，只要是人類變數，他們都會有藍圖內的屬性跟方法，以上例而言，只要是人類，都會有名字、年紀、是否已婚、體重、身高這些屬性，跟跑、吃、回答名字三種方法。</p>
+<p>所以藍圖是抽象的，你必須要根據藍圖把人實體化出來，才真的會有人。</p>
+<blockquote>
+<p>以故事情境來說，如果今天要生產一個蛋糕，一定會有蛋糕的作法(藍圖)，大<br>家會遵照做法(藍圖)，把蛋糕給生產(實體化)出來。<br>希望帶個例子大家會比較好理解。<br>[name=Orange]</p>
+</blockquote>
+
+        <h3 id="取用屬性、取用成員函式-方法-member-function"   >
+          <a href="#取用屬性、取用成員函式-方法-member-function" class="heading-link"><i class="fas fa-link"></i></a><a href="#取用屬性、取用成員函式-方法-member-function" class="headerlink" title="取用屬性、取用成員函式(方法) member function"></a><span style="color:red">取用</span>屬性、<span style="color:red">取用</span>成員函式(方法) member function</h3>
+      <p>實體化(宣告物件)沒問題之後，我們來說一下取用屬性跟方法。在上例的 29 ~ 33，36 ~ 40 行。<br><span style="color:red"><strong>每一個</strong></span>人類物件(變數)都有名字、年紀這些屬性或是跑、吃這些方法，而我們在程式碼的做法是實體化一個人之後加上 <code>.</code> 這個符號，還記得一上就說過 <code>.</code> 這個符號代表中文字 <code>的</code>。</p>
+<p>所以</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p1.name = &quot;orange&quot;;        // p1 的名字屬性</span><br><span class="line">p1.age = 21;               // p1 的年紀屬性</span><br><span class="line">p1.is_marriage = false;    // p1 的是否已婚屬性</span><br><span class="line">p1.weight = 1.73;          // p1 的體重</span><br><span class="line">p1.height = 60;            // p1 的身高</span><br><span class="line">p1.what_your_name();       // 呼叫 詢問 p1 的名字 方法(函式)</span><br><span class="line">p1.run();                  // 呼叫 p1 跑步(函式)</span><br><span class="line">p1.eat();                  // 呼叫 p1 吃東西 (函式)</span><br></pre></td></tr></table></div></figure>
+
+<p>跟上學期很相似的概念是甚麼呢?<br>一個字串都有詢問長度這個方法。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;orange&quot;;</span><br><span class="line">s1.length();    // 呼叫 s1 的長度方法(函式)</span><br></pre></td></tr></table></div></figure>
+<p><span style="color:red"><strong>每一個</strong></span>字串都有詢問長度這個方法(函式)</p>
+<p>所以你有感同身受嗎，一個字串其實他是一個被實體化出來的物件，他隸屬於 string 這個類別(藍圖)，今天要使用字串，我們把它實體化成一個物件(s1)。</p>
+<blockquote>
+<p>所以為什麼我們從未說過 string 是一個基礎資料型態，像 int 或 float<br>因為他是自定義資料型態。<br>[name=Orange]</p>
+</blockquote>
+
+        <h3 id="取用屬性"   >
+          <a href="#取用屬性" class="heading-link"><i class="fas fa-link"></i></a><a href="#取用屬性" class="headerlink" title="取用屬性"></a>取用屬性</h3>
+      <p>接著你應該有發現，屬性後都沒有括號，因為他只是一個值。像名字、體重、身高…等。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p1.name</span><br><span class="line">p1.weight</span><br></pre></td></tr></table></div></figure>
+
+<p>所以千萬不要在不該加上括號的地方加上括號，要加括號代表他是一個函式(方法)。</p>
+
+        <h3 id="取用-函式-方法"   >
+          <a href="#取用-函式-方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#取用-函式-方法" class="headerlink" title="取用(函式)方法"></a>取用(函式)方法</h3>
+      <p>而取用類別(結構)的函式呢，就如同一上在教 function 一樣，同樣有可能有參數，或者沒有。而一般的呼叫 function 如下。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function_name(arguments)</span><br></pre></td></tr></table></div></figure>
+<p>而物件的函式(方法)就只是多了，隸屬於誰的這樣的動作。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p1.run()</span><br><span class="line">p1.eat()</span><br></pre></td></tr></table></div></figure>
+
+<p>是誰要執行跑這件事，誰要執行吃這件事。</p>
+<hr>
+<p>最基本的用法就講到這裡，更進階的就給後面的筆記吧!</p>
+
+        <h2 id="Reference"   >
+          <a href="#Reference" class="heading-link"><i class="fas fa-link"></i></a><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
+      <ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://vinesmsuic.github.io/2020/01/16/c++-struct/#reference" >C++ Struct 教學</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://kopu.chat/c-%e8%aa%9e%e8%a8%80%ef%bc%9a%e7%b5%90%e6%a7%8b%ef%bc%88struct%ef%bc%89%e8%87%aa%e8%a8%82%e4%b8%8d%e5%90%8c%e8%b3%87%e6%96%99%e5%9e%8b%e6%85%8b%e7%b6%81%e4%b8%80%e8%b5%b7/" >C 語言：結構（struct）自訂不同資料型態綁一起</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://c.biancheng.net/cpp/biancheng/view/2982.html" >C++ class和struct的区别</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/structure-%E7%B5%90%E6%A7%8B/">https://410735038.github.io/2022/05/29/structure-%E7%B5%90%E6%A7%8B/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/class-%E9%A1%9E%E5%88%A5/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">class 類別</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/Untitled/"><span class="paginator-prev__text">進階探討 pointer 雙重指標!與 2-d dynamic array</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#structure-%E7%B5%90%E6%A7%8B"><span class="toc-number"></span> <span class="toc-text">
+          structure 結構</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B"><span class="toc-number"></span> <span class="toc-text">
+          資料型態</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E8%A8%82%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B-%E4%BB%80%E9%BA%BC%E6%84%8F%E6%80%9D"><span class="toc-number"></span> <span class="toc-text">
+          自訂資料型態?什麼意思?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%A9%9E%E8%A7%A3%E9%87%8B"><span class="toc-number"></span> <span class="toc-text">
+          名詞解釋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#structure-%E8%AA%9E%E6%B3%95%E8%AA%8D%E8%AD%98"><span class="toc-number"></span> <span class="toc-text">
+          structure 語法認識</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-struct"><span class="toc-number"></span> <span class="toc-text">
+          如何使用 struct?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%A6%E9%AB%94%E5%8C%96"><span class="toc-number"></span> <span class="toc-text">
+          實體化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E7%94%A8%E5%B1%AC%E6%80%A7%E3%80%81%E5%8F%96%E7%94%A8%E6%88%90%E5%93%A1%E5%87%BD%E5%BC%8F-%E6%96%B9%E6%B3%95-member-function"><span class="toc-number"></span> <span class="toc-text">
+          取用屬性、取用成員函式(方法) member function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E7%94%A8%E5%B1%AC%E6%80%A7"><span class="toc-number"></span> <span class="toc-text">
+          取用屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E7%94%A8-%E5%87%BD%E5%BC%8F-%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">
+          取用(函式)方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number"></span> <span class="toc-text">
+          Reference</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

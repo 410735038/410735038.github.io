@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           class 類別                           前言       類別比較被廣泛應用於各個程式語言之中，結構是從 C 過渡到 C++ 的一個產物，在 Java、C# 裡 class 被非常廣泛的運用，學好 class 非常重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="class 類別">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/class-%E9%A1%9E%E5%88%A5/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           class 類別                           前言       類別比較被廣泛應用於各個程式語言之中，結構是從 C 過渡到 C++ 的一個產物，在 Java、C# 裡 class 被非常廣泛的運用，學好 class 非常重">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-05-29T09:39:14.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:39:25.592Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary"><title>class 類別 | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/class-%E9%A1%9E%E5%88%A5/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">class 類別</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="class-類別"   >
+          <a href="#class-類別" class="heading-link"><i class="fas fa-link"></i></a><a href="#class-類別" class="headerlink" title="class 類別"></a>class 類別</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>類別比較被廣泛應用於各個程式語言之中，結構是從 C 過渡到 C++ 的一個產物，在 Java、C# 裡 class 被非常廣泛的運用，學好 class 非常重要，雖然在 C++ 內的特性到其他程式語言可能有些許不同，但大觀念跟方向都非常雷同。</p>
+<p>class 跟 structure 在 C++ 內語法可說是非常相像，所以這篇筆記就不寫太多基本語法，細部的觀念會拆分成後面的筆記來講解。</p>
+<p>這篇主要來談論新東西 public 與 private。</p>
+<blockquote>
+<p><span style="color:red"><strong>請不要忘記 class 也是在自定義資料型態哦</strong></span></p>
+</blockquote>
+<span id="more"></span>
+
+
+        <h2 id="class-語法認識"   >
+          <a href="#class-語法認識" class="heading-link"><i class="fas fa-link"></i></a><a href="#class-語法認識" class="headerlink" title="class 語法認識"></a>class 語法認識</h2>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">class_name</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    member1;</span><br><span class="line">    member2;</span><br><span class="line">    member_function1;</span><br><span class="line">    member_function2;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    member3;</span><br><span class="line">    member4;</span><br><span class="line">    member_function3;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+<blockquote>
+<p>相信大家發現了兩個新的關鍵字 <code>public</code> &amp; <code>private</code>，我們等等會來詳細的介紹他們。</p>
+</blockquote>
+<p>我們先來看一個 class 的例子。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">get_name</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get_age</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">get_salary</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> salary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">get_company</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> company;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    string company;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></div></figure>
+
+<p>相信上面這個例子，看過去基本上與 structure 沒有甚麼不同，都有屬性與方法。</p>
+<ul>
+<li>屬性<ul>
+<li>名字 name</li>
+<li>年紀 age</li>
+<li>薪水 salary</li>
+<li>隸屬公司 company</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>get_name()</li>
+<li>get_age()</li>
+<li>get_salary()</li>
+<li>get_company()</li>
+</ul>
+</li>
+</ul>
+<p>只差在新的 public 跟 private 兩個沒見過的關鍵字。所以我們來介紹他們。</p>
+
+        <h2 id="存取修飾子-Access-Modifier"   >
+          <a href="#存取修飾子-Access-Modifier" class="heading-link"><i class="fas fa-link"></i></a><a href="#存取修飾子-Access-Modifier" class="headerlink" title="存取修飾子 Access Modifier"></a>存取修飾子 Access Modifier</h2>
+      
+        <h3 id="前提先記住"   >
+          <a href="#前提先記住" class="heading-link"><i class="fas fa-link"></i></a><a href="#前提先記住" class="headerlink" title="前提先記住"></a>前提先記住</h3>
+      <blockquote>
+<p><span style="color:red; font-size:20px"><strong>class 預設所有的 member 為 private，struct 預設所有的 member 為 public。</strong></span><br>[name=規定沒有為什麼]</p>
+</blockquote>
+
+        <h3 id="設計思維"   >
+          <a href="#設計思維" class="heading-link"><i class="fas fa-link"></i></a><a href="#設計思維" class="headerlink" title="設計思維"></a>設計思維</h3>
+      <p>在真的談論存取修飾子之前，先來談論一些基本的程式設計思維，大家會比較有感覺。</p>
+<p>今天大家如果想要開發一個線上購物平台 APP 讓大家來線上購物(類似蝦皮之類)，每個使用者都有一個帳號，都會用那個帳號在商城裡面逛，購買自己想要的商品，或是上架自己的商品。</p>
+<p><span style="color:red"><strong>每個使用者</strong></span>都有自己的帳號、密碼、使用者名稱，自己管理的商場等等的內容，每個人的帳號彼此獨立互不相干。</p>
+<p>而有一些比較隱私的內容，別人沒辦法存取，你沒辦法去取得別人的密碼，或是管理你沒有權限的商場。</p>
+<p>而有些東西大家可以存取，你可能會關注某一個商場，比方某某品牌的服飾店，而這個服飾店可能其他人也都有在關注他。你可以透過進入這個商場去瀏覽店家上架的商品。</p>
+<p>透過上面簡單的描述你應該可以看到，你可以瀏覽大家<span style="color:red"><strong>公開</strong></span>的內容，但<span style="color:red"><strong>隱私</strong></span>的內容，只有自己可以存取。</p>
+<p>那我想關鍵字已經帶出來了!</p>
+<ul>
+<li>公開 = <span style="color:red">public</span></li>
+<li>隱私 = <span style="color:red">private</span></li>
+</ul>
+<p>所以對於服飾店而言，讓大家瀏覽他的商品是店家<span style="color:red"><strong>公開</strong></span>的資訊，但比方說一個商品的價格是多少，除了商家主人沒有人能夠去修改，大家只能夠觀看而已。</p>
+<p>相信到了這裡存取修飾子的核心概念已經深入你心了，就是身為一個開發者，哪些東西能夠被大家存取，哪些東西只能夠被自己存取，你必須要明確地訂定好權限，以防一些安全的問題。</p>
+
+        <h3 id="public、private"   >
+          <a href="#public、private" class="heading-link"><i class="fas fa-link"></i></a><a href="#public、private" class="headerlink" title="public、private"></a>public、private</h3>
+      <p>延續上例，我們來看一下~</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">get_name</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get_age</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">get_salary</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> salary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">get_company</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> company;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    string company;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    person p1;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;p1&#x27;s name is &quot;</span> &lt;&lt; p1.<span class="built_in">get_name</span>() &lt;&lt; endl</span><br><span class="line">         &lt;&lt; <span class="string">&quot;p1&#x27;s age is &quot;</span> &lt;&lt; p1.<span class="built_in">get_age</span>() &lt;&lt; endl</span><br><span class="line">         &lt;&lt; <span class="string">&quot;p1&#x27;s salary is &quot;</span> &lt;&lt; p1.<span class="built_in">get_salary</span>() &lt;&lt; endl</span><br><span class="line">         &lt;&lt; <span class="string">&quot;p1&#x27;s company is &quot;</span> &lt;&lt; p1.<span class="built_in">get_company</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>你可以發現對於一個 person 物件 p1 而言，他有一些內容是不想讓別人看到的，比方說名字、年紀、薪水、公司等放在 private 內的內容。有一些能夠讓大家去存取的內容如 get_name 等的 function。</p>
+<p>所以如果你寫這樣:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p1.name; // error</span><br><span class="line">p1.age; // error</span><br></pre></td></tr></table></div></figure>
+<p>因為 name 跟 age 對於 p1 而言是 private，p1 不想讓你直接取用，你不能直接去取用他，程式會報錯。</p>
+<p>那你應該有發現，究竟誰能夠使用 private 的 member 呢?<br>只有<span style="color:red"><strong>類別藍圖(class)</strong></span>本身，當你在定義一個藍圖的規格的時候，藍圖內可以毫無限制的使用 member 或是 member function。<br>所以你會發現 4、7、10、13 行能夠暢行無阻的取用屬性直接打名字，因為是在類別藍圖內，可以不用在乎權限去取用屬性或方法。</p>
+<p>但一旦物件被實體化，都必須遵循藍圖所訂定的存取規定。</p>
+
+        <h3 id="getter-amp-setter-取得與設定"   >
+          <a href="#getter-amp-setter-取得與設定" class="heading-link"><i class="fas fa-link"></i></a><a href="#getter-amp-setter-取得與設定" class="headerlink" title="getter &amp; setter (取得與設定)"></a>getter &amp; setter (取得與設定)</h3>
+      <p>你應該有發現上例有一件很奇怪的事情，明明我說無法存取，然而我們還是透過了 public 的公開方法去取得了 name、age 的數值，回到上面講的故事，就是對於賣衣服的商家而言，你看的到商品的價格，但你無法修改它的價格。</p>
+<p>所以上例來說，你可以取得 p1 的名字、年紀，但你無法修改他的值。</p>
+<blockquote>
+<p>如果今天服飾店內商品的價格能夠被大家改來改去，那會出大事的對吧!<br>[name=Orange]</p>
+</blockquote>
+<p>getter &amp; setter 就是要透過公開的方法，來讓你去修改，或是取得私有(private)屬性的值。</p>
+<p>getter 的好處是，讓你取得我的值但你無法修改值本身(碰不到那塊記憶體)。<br>setter 的好處是，提供一個接口讓你去修改私有屬性。</p>
+<p>所以我們再來延伸一下上面的例子。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// getter 用來取得私有屬性</span></span><br><span class="line">    <span class="function">string <span class="title">get_name</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> name;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get_age</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> age;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">get_salary</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> salary;&#125;</span><br><span class="line">    <span class="function">string <span class="title">get_company</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> company;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// setter 用來修改私有屬性</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set_name</span><span class="params">(string s)</span></span>&#123;name = s;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set_age</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;age = a;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    string name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    string company;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    person p1;</span><br><span class="line">    p1.<span class="built_in">set_name</span>(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">    p1.<span class="built_in">set_age</span>(<span class="number">20</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;p1&#x27;s name is &quot;</span> &lt;&lt; p1.<span class="built_in">get_name</span>() &lt;&lt; endl</span><br><span class="line">         &lt;&lt; <span class="string">&quot;p1&#x27;s age is &quot;</span> &lt;&lt; p1.<span class="built_in">get_age</span>() &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    p1.<span class="built_in">set_name</span>(<span class="string">&quot;orange&quot;</span>);</span><br><span class="line">    p1.<span class="built_in">set_age</span>(<span class="number">21</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;p1&#x27;s name is &quot;</span> &lt;&lt; p1.<span class="built_in">get_name</span>() &lt;&lt; endl</span><br><span class="line">         &lt;&lt; <span class="string">&quot;p1&#x27;s age is &quot;</span> &lt;&lt; p1.<span class="built_in">get_age</span>() &lt;&lt; endl</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>假設今天假定公司跟薪水的值無法被修改，所以沒有 setter，而名字跟年齡可以一直修改，你可以體會上面的例子嗎?</p>
+<blockquote>
+<p>所以還是老話一句，<span style="color:red"><strong>類別要怎麼設計，什麼東西要是 private 或是 public ，完全端看需求而定</strong></span>。完全沒有一個相對應的規則，腦袋要轉哦。<br>[name=Orange]</p>
+</blockquote>
+
+        <h3 id="protected"   >
+          <a href="#protected" class="heading-link"><i class="fas fa-link"></i></a><a href="#protected" class="headerlink" title="protected"></a>protected</h3>
+      <p>其實還有一個存取修飾子稱為 protected，但他比較複雜一點，我放了參考連結在下面，當作補充自己讀吧~<br>現在還不會可以先略過。</p>
+<blockquote>
+<p>如果老師上的到繼承，我會把 protected 的筆記放在繼承後面。<br>[name=Orange]</p>
+</blockquote>
+
+        <h2 id="小總結"   >
+          <a href="#小總結" class="heading-link"><i class="fas fa-link"></i></a><a href="#小總結" class="headerlink" title="小總結"></a>小總結</h2>
+      
+        <h3 id="資料抽象化-Abstraction"   >
+          <a href="#資料抽象化-Abstraction" class="heading-link"><i class="fas fa-link"></i></a><a href="#資料抽象化-Abstraction" class="headerlink" title="資料抽象化(Abstraction)"></a>資料抽象化(Abstraction)</h3>
+      <blockquote>
+<p>定義好一個類別藍圖，就是物件導向中我們稱的資料抽象化(Abstraction)<br>[name=各大神]</p>
+</blockquote>
+
+        <h3 id="封裝-Encapsulation"   >
+          <a href="#封裝-Encapsulation" class="heading-link"><i class="fas fa-link"></i></a><a href="#封裝-Encapsulation" class="headerlink" title="封裝(Encapsulation)"></a>封裝(Encapsulation)</h3>
+      <blockquote>
+<p>而這個<span style="color:red"><strong>為類別內的屬性與方法訂定好權限(public、private、protected)這件事情，就是物件導向內的封裝(Encapsulation</strong>)</span><br>[name=各大神]</p>
+</blockquote>
+
+        <h2 id="Reference"   >
+          <a href="#Reference" class="heading-link"><i class="fas fa-link"></i></a><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
+      <p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://openhome.cc/Gossip/CppGossip/protectedMember.html" >protected 說明 - 受保護的（protected）成員</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/class-%E9%A1%9E%E5%88%A5/">https://410735038.github.io/2022/05/29/class-%E9%A1%9E%E5%88%A5/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/%E5%BB%BA%E6%A7%8B%E5%AD%90-constructor-%E8%AA%8D%E8%AD%98-this/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">建構子 constructor &amp; 認識 this</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/structure-%E7%B5%90%E6%A7%8B/"><span class="paginator-prev__text">structure 結構</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#class-%E9%A1%9E%E5%88%A5"><span class="toc-number"></span> <span class="toc-text">
+          class 類別</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#class-%E8%AA%9E%E6%B3%95%E8%AA%8D%E8%AD%98"><span class="toc-number"></span> <span class="toc-text">
+          class 語法認識</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%8F%96%E4%BF%AE%E9%A3%BE%E5%AD%90-Access-Modifier"><span class="toc-number"></span> <span class="toc-text">
+          存取修飾子 Access Modifier</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E5%85%88%E8%A8%98%E4%BD%8F"><span class="toc-number"></span> <span class="toc-text">
+          前提先記住</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD"><span class="toc-number"></span> <span class="toc-text">
+          設計思維</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public%E3%80%81private"><span class="toc-number"></span> <span class="toc-text">
+          public、private</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getter-amp-setter-%E5%8F%96%E5%BE%97%E8%88%87%E8%A8%AD%E5%AE%9A"><span class="toc-number"></span> <span class="toc-text">
+          getter &amp; setter (取得與設定)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protected"><span class="toc-number"></span> <span class="toc-text">
+          protected</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%B8%BD%E7%B5%90"><span class="toc-number"></span> <span class="toc-text">
+          小總結</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E6%8A%BD%E8%B1%A1%E5%8C%96-Abstraction"><span class="toc-number"></span> <span class="toc-text">
+          資料抽象化(Abstraction)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%9D-Encapsulation"><span class="toc-number"></span> <span class="toc-text">
+          封裝(Encapsulation)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number"></span> <span class="toc-text">
+          Reference</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           進階探討 pointer 雙重指標!與 2-d dynamic array                           前言       在真的探討二維的動態陣列之前，有一個必須知道的基本知識就是雙重指標，而他的概念有點不直覺，我們一起來">
+<meta property="og:type" content="article">
+<meta property="og:title" content="進階探討 pointer 雙重指標!與 2-d dynamic array">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/Untitled/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           進階探討 pointer 雙重指標!與 2-d dynamic array                           前言       在真的探討二維的動態陣列之前，有一個必須知道的基本知識就是雙重指標，而他的概念有點不直覺，我們一起來">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/91ksWfZ.png">
+<meta property="og:image" content="https://i.imgur.com/cv4u84y.png">
+<meta property="og:image" content="https://i.imgur.com/H1gAAN2.png">
+<meta property="og:image" content="https://i.imgur.com/PrvB2Cv.png">
+<meta property="og:image" content="https://3.bp.blogspot.com/-2hkNUAq93Ds/VmsO7aLrQTI/AAAAAAAA_P0/FNmVMTZNgUk/s1600/array_2d_dynamic.png">
+<meta property="og:image" content="https://i.imgur.com/3pYgejm.png">
+<meta property="article:published_time" content="2022-05-29T09:37:52.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:38:13.078Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/91ksWfZ.png"><title>進階探討 pointer 雙重指標!與 2-d dynamic array | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/Untitled/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">進階探討 pointer 雙重指標!與 2-d dynamic array</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="進階探討-pointer-雙重指標-與-2-d-dynamic-array"   >
+          <a href="#進階探討-pointer-雙重指標-與-2-d-dynamic-array" class="heading-link"><i class="fas fa-link"></i></a><a href="#進階探討-pointer-雙重指標-與-2-d-dynamic-array" class="headerlink" title="進階探討 pointer 雙重指標!與 2-d dynamic array"></a>進階探討 pointer 雙重指標!與 2-d dynamic array</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>在真的探討二維的動態陣列之前，有一個必須知道的基本知識就是雙重指標，而他的概念有點不直覺，我們一起來看看。</p>
+<p>在開始閱讀這篇筆記前，請確定你閱讀過運算子的優先權了哦! -&gt; <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hackmd.io/@ndhu-programming-2021/HJAkAf8AF" >我是傳送門</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<blockquote>
+<p>第一次看請不要灰心，一定會看不懂，多看幾次吧QAQ。<br>[name=Orange]</p>
+</blockquote>
+<span id="more"></span>
+
+
+        <h2 id="雙重指標變數"   >
+          <a href="#雙重指標變數" class="heading-link"><i class="fas fa-link"></i></a><a href="#雙重指標變數" class="headerlink" title="雙重指標變數"></a>雙重指標變數</h2>
+      <p>複習一下，一般的指標變數如下:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int *p;</span><br></pre></td></tr></table></div></figure>
+<p>那既然會說是雙重指標變數，長相如下:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int **p;</span><br></pre></td></tr></table></div></figure>
+<p>可以看到有兩顆 <code>*</code>，那該怎麼理解呢? 我們先從名詞解釋開始吧。<br>還記得我們稱 <code>int *p</code> 為一個指標變數，會儲存一個指標(記憶體位址)。</p>
+<p>不失一般性，<code>int **p</code> 仍為一個指標變數，也會儲存一個指標(記憶體位址)，但他儲存的指標是一個指標變數的指標(記憶體位址)。</p>
+<p>所以就會有我們常聽到的，雙重指標變數就是「<span style="color:red"><strong>指向指標變數的指標變數</strong></span>」。</p>
+<p>我們馬上看個實際例子。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line"><span class="keyword">int</span> **p2 = &amp;p1;</span><br></pre></td></tr></table></div></figure>
+<p>以 <code>int *p1</code> 來看，他是一個指標變數，儲存一個變數 a 的指標。<br>以 <code>int **p2</code> 來看，他是一個指標變數，<span style="color:red"><strong>儲存一個指標變數的指標</strong></span>。</p>
+<p>如果你覺得很饒口，看一下下面的圖幫助你理解。</p>
+<p><img src="https://i.imgur.com/91ksWfZ.png"></p>
+<p>核心觀念千萬不要忘記，無論是一般的指標變數，還是雙重指標變數，都是儲存記憶體位址，就算今天變成三重指標變數，四重指標變數都一樣哦!</p>
+<p>而這邊宣告他們是 int 型態就與上一篇筆記在講一般指標變數時相同，代表該指標變數最後指向的記憶體位址所儲存的值必須要是 int 型態。</p>
+
+        <h3 id="小提醒"   >
+          <a href="#小提醒" class="heading-link"><i class="fas fa-link"></i></a><a href="#小提醒" class="headerlink" title="小提醒"></a>小提醒</h3>
+      <p>今天你宣告一個指標變數是幾層指標，他就必須要指向幾次，可以參考上圖，雙重指標變數(0x300)會根據記憶體位址指兩次，一般指標變數(0x200)只有指一次。</p>
+<p>如果你把指向次數不同的位址指派錯人，程式是會報錯的哦，像下面這樣。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line"><span class="keyword">int</span> **p2 = &amp;a; <span class="comment">// error!!</span></span><br></pre></td></tr></table></div></figure>
+<p>你會看到像下面這樣的錯誤訊息。沒有辦法把一重指標變數指派給雙重指標變數，所以請一定要明確了解這邊的運作方式哦。</p>
+<p><img src="https://i.imgur.com/cv4u84y.png"></p>
+
+        <h3 id="precedence-優先權與結合性"   >
+          <a href="#precedence-優先權與結合性" class="heading-link"><i class="fas fa-link"></i></a><a href="#precedence-優先權與結合性" class="headerlink" title="precedence 優先權與結合性"></a>precedence 優先權與結合性</h3>
+      <p>還記得請各位去看一下運算子的優先權，這邊想跟大家討論的原因是，<code>int **p</code>這邊有兩個 <code>*，亦稱 dereference 運算子</code>，請問要先看哪個星號，優先權是如何?</p>
+<ul>
+<li><span style="color:red">dereference 的結合性是右結合</span>，會先看右邊<ul>
+<li>所以宣告雙重指標其實是像這樣 <code>int *(*p2)</code></li>
+</ul>
+</li>
+</ul>
+<p>看到 <code>*</code> 號(左邊那顆)代表宣告指標變數，但因為是右結合，所以 p2 與 右邊的 <code>*</code> 優先結合，這樣由左至右就可以翻譯成，宣告一個指標變數其指向一個一重指標變數。</p>
+
+        <h2 id="雙重指標變數的取值與取址"   >
+          <a href="#雙重指標變數的取值與取址" class="heading-link"><i class="fas fa-link"></i></a><a href="#雙重指標變數的取值與取址" class="headerlink" title="雙重指標變數的取值與取址"></a>雙重指標變數的取值與取址</h2>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line">    <span class="keyword">int</span> **p2 = &amp;p1;</span><br><span class="line">    <span class="comment">//a 取值</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[變數] a 存的值: &quot;</span> &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    <span class="comment">//a 取址</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[變數] a 所在的記憶體位址: &quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//p1 取值</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p1 指向的位址儲存的值: &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;</span><br><span class="line">    <span class="comment">//p1 取址</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p1 指向的位址: &quot;</span> &lt;&lt; p1 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p1 所在的記憶體位址: &quot;</span> &lt;&lt; &amp;p1 &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p2 取值</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p2 指向的位址所儲存的值(位址): &quot;</span> &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p2 指向的位址所指向的位址儲存的值: &quot;</span> &lt;&lt; **p2 &lt;&lt; endl; </span><br><span class="line">    <span class="comment">//p2 取址</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p2 指向的位址: &quot;</span> &lt;&lt; p2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;[指標變數] p2 所在的記憶體位址: &quot;</span> &lt;&lt; &amp;p2 &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="https://i.imgur.com/H1gAAN2.png"></p>
+<blockquote>
+<p>對齊工具 setw 與 left -&gt;小題外話<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://dotblogs.com.tw/v6610688/2013/11/05/cplusplus_output_align_setw_set_field_width" >(1)</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>、<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/wxxweb/archive/2011/06/01/2065671.html" >(2)</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</blockquote>
+<p>相信都是文字有點不直覺，我們再看張圖吧!</p>
+<p><img src="https://i.imgur.com/PrvB2Cv.png"></p>
+<p>已經講到最簡單摟，希望大家多多思考，有問題鼓勵發問!</p>
+
+        <h2 id="動態配置二維陣列"   >
+          <a href="#動態配置二維陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#動態配置二維陣列" class="headerlink" title="動態配置二維陣列"></a>動態配置二維陣列</h2>
+      <p>在真的配置動態二維陣列之前，有一些觀念要跟大家討論。</p>
+<p>二維動態陣列配置的記憶體運作方式是像這樣的，請看下圖。</p>
+<blockquote>
+<p><span style="color:red"><strong>圖片來源</strong></span> -&gt; <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2015/12/cc-dynamic-2d-arrays-in-c.html" >here</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><img src="https://3.bp.blogspot.com/-2hkNUAq93Ds/VmsO7aLrQTI/AAAAAAAA_P0/FNmVMTZNgUk/s1600/array_2d_dynamic.png"></p>
+</blockquote>
+<ul>
+<li>最上層，雙重指標變數 p<ul>
+<li>會是由外往內配，先配置最上層(圖中最左)的雙重指標，讓它往下指，而我們知道一個指標變數就存一個記憶體位址，所以它要存下一層一維陣列的陣列頭 p[0]，剩下的 p[1]、p[2] 則是依靠我們之前說的位移量去遍歷它。</li>
+</ul>
+</li>
+<li>第二層的 p[0]、p[1]…，因為要能夠指到最內層的陣列，所以每一個(p[0]、p[1]…p[n])都會被視為指向一維陣列頭(記憶體位址)的指標變數<ul>
+<li>因此 p[0] 會衍生出一條一維陣列，p[1] 會衍生出一條一維陣列，依此類推。</li>
+<li>而對於 p[0] 而言，p[0][0]、p[0][1] 則是依靠位移量來達到。</li>
+</ul>
+</li>
+</ul>
+<p>所以第二層我們稱它為<span style="color:red"><strong>指標變數陣列</strong></span>，陣列中的每一格都儲存一個指標變數。我們後面來說明它。</p>
+<blockquote>
+<p>就像<strong>整數陣列</strong>每格<strong>存整數</strong>，<strong>浮點數陣列</strong>每格<strong>存浮點數</strong>。<br><strong>指標變數陣列</strong>每格<strong>存指標變數</strong>，就這麼簡單~<br><br>所以你只要搞懂什麼是指標變數你就會了。<br> [name=Orange]</p>
+</blockquote>
+
+        <h3 id="動態配置二維陣列的語法"   >
+          <a href="#動態配置二維陣列的語法" class="heading-link"><i class="fas fa-link"></i></a><a href="#動態配置二維陣列的語法" class="headerlink" title="動態配置二維陣列的語法"></a>動態配置二維陣列的語法</h3>
+      <p>既然已經知道上面那張圖的看法跟建立陣列的方式，我們來看 CODE。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> row = <span class="number">3</span>, col = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> **p = <span class="keyword">new</span> <span class="keyword">int</span>*[row];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">        p[i] = <span class="keyword">new</span> <span class="keyword">int</span>[col];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<ul>
+<li>第 3 行<ul>
+<li>宣告一個雙重指標變數 p</li>
+<li>因為要配置出下一層的指標變數陣列，讓每一格指標變數都能指出一條陣列(這邊假設 row = 3，所以有 3 條) -&gt; 3 條一維陣列建構出一個二維陣列。</li>
+</ul>
+</li>
+<li>第 4 行<ul>
+<li>假設我們要配置出一個 3 * 2 的陣列，在第 3 行已經配置了三格儲存 3 個指標變數，接下來要為這三個指標變數分別指向一個陣列的陣列頭。</li>
+</ul>
+</li>
+<li>第 5 行<ul>
+<li>每條一維陣列有 2 格(col = 2)</li>
+<li>因為在第 3 行已經配置一個長度為 3 的一維指標變數陣列，所以 p[i] 代表配置出的陣列的位移量，去取得該記憶體位址內的值。如果這一行混淆你，我們返璞歸真看一下下面。</li>
+<li><strong>提醒</strong> : p[i] 跟 p[i][j] 的位移量影響的是不同的方向哦。</li>
+</ul>
+</li>
+</ul>
+<p>別忘記之前講的。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line"><span class="keyword">int</span> **p2 = &amp;p1;</span><br><span class="line">cout &lt;&lt; p2 &lt;&lt; endl;</span><br></pre></td></tr></table></div></figure>
+<p><code>cout &lt;&lt; p2</code> 代表印出指標變數 p2 所指向的位址。</p>
+<p>那換成下面這樣。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int **p2 = new int*[3];</span><br><span class="line">cout &lt;&lt; p2 &lt;&lt; endl;</span><br></pre></td></tr></table></div></figure>
+<p><code>cout &lt;&lt; p2</code> 會印出指標變數 p2 所指向的陣列頭的記憶體位址。</p>
+<p>而 <code>cout &lt;&lt; p2[0]</code> 會取出 p2 這個指標變數陣列第一格所儲存的值，因為每一格都是指標變數，所以會印出第一格指標變數的記憶體位址。</p>
+<p><code>cout &lt;&lt; p2[0][0]</code> 會取出 p2 這個指標變數陣列第一格所儲存的值(位址)所儲存的值。<br>以下依此類推…</p>
+<p>畫個圖就像這樣。</p>
+<p><img src="https://i.imgur.com/3pYgejm.png"></p>
+<p>上面這張圖可以用下面這個範例玩一下，確保你知道圖上每個取值取址的不同處哦!</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> **p = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 配置</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    	p[i] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 取址</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)&#123;</span><br><span class="line">    		cout &lt;&lt; &amp;p[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 附值</span></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)&#123;</span><br><span class="line">            p[i][j] = k;</span><br><span class="line">            k++;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 取值</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; &amp;p[<span class="number">0</span>] &lt;&lt; <span class="string">&quot; &quot;</span>          <span class="comment">//p equal to &amp;p[0]</span></span><br><span class="line">         &lt;&lt; p[<span class="number">0</span>] &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; &amp;p[<span class="number">0</span>][<span class="number">0</span>] &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">//p[0] equal to &amp;p[0][0]</span></span><br><span class="line">         &lt;&lt; p[<span class="number">0</span>][<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>所以其實一個 3 * 2 的動態陣列，就配置了 10 個記憶體位址，你說它真的非常有效率嗎?真的端看需求而定!</p>
+
+        <h3 id="動態配置記憶體，用完請回收"   >
+          <a href="#動態配置記憶體，用完請回收" class="heading-link"><i class="fas fa-link"></i></a><a href="#動態配置記憶體，用完請回收" class="headerlink" title="動態配置記憶體，用完請回收"></a>動態配置記憶體，用完請回收</h3>
+      <p>上面的例子動態配置了 3 * 2 的陣列，但配出來的這些記憶體，必須要被收回去，語法先來。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置</span></span><br><span class="line"><span class="keyword">int</span> **p = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    p[i] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//回收</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">delete</span>[] p[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">delete</span>[] p;</span><br></pre></td></tr></table></div></figure>
+<p>我想在看配置的時候，應該有點感覺，我們是從外到內一直分配記憶體出來，所以在回收的時候呢，要先把最內部的記憶體刪乾淨，才能把外面的刪掉。</p>
+<ul>
+<li>最內層<ul>
+<li>第 7 + 8 行，因為總共配置 3 條，每條 2 格，所以是先把 p[0 ~ 2][0 ~ 1] 共 6 格的記憶體刪掉</li>
+<li><blockquote>
+<p>語法沒有 p[0 ~ 2][0 ~ 1] 這種寫法，這邊只是說明!<br>這樣寫絕對大扣分<br>[name=Orange]</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>外層<ul>
+<li>第 10 行</li>
+<li>接者再把 p[0~2] 共 3 格，的記憶體給刪掉</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:green;font-size:20px"><strong>到這邊的內容是參考書的內容，要考過考試大家要學會，下面是補充。</strong></span></p>
+<hr>
+<p><span style="color:green;font-size:20px"><strong>以下為補充~</strong></span></p>
+
+        <h3 id="補充-自行閱讀-指標變數陣列"   >
+          <a href="#補充-自行閱讀-指標變數陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#補充-自行閱讀-指標變數陣列" class="headerlink" title="[補充 - 自行閱讀]指標變數陣列"></a>[補充 - 自行閱讀]指標變數陣列</h3>
+      <blockquote>
+<p>我左思右想，我雖然會，但我決定依靠大神們來講解<br>[name=Orange]</p>
+</blockquote>
+<ul>
+<li>這篇請閱讀文章內 3(a)(b)<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://hackgrass.blogspot.com/2018/03/c-pointerint-foo-int-bar.html" >簡單搞懂指標(pointer)、指標陣列(pointers of array, int *foo[]) 與指向陣列的指標 (pointer to array, int (*bar)[])</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><blockquote>
+<p>雖然語法是 C，不是 C++，但核心概念不變，可以自己用 C++ 的語法試試看<br>裡面有一些小地方寫錯，麻煩自己判別哦</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>接著請閱讀這篇<ul>
+<li><blockquote>
+<p>上面那篇要你們看的地方看得懂的話，這篇一定看得懂</p>
+</blockquote>
+</li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://charlottehong.blogspot.com/2017/11/c-c.html" >C / C++ 函式傳遞二維陣列 範例與解說</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</li>
+<li>最後請閱讀這篇<ul>
+<li><blockquote>
+<p>雖然是大陸用語，但我相信聰穎的你一定知道對應到我們常說的甚麼。<br>不會歡迎來找我討論哦~</p>
+</blockquote>
+</li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/liitdar/article/details/80972088" >C/C++编程语言中char** a和char* a[]介绍</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="補充-自行閱讀-雙重指標的運算-double-pointer-arithmetic"   >
+          <a href="#補充-自行閱讀-雙重指標的運算-double-pointer-arithmetic" class="heading-link"><i class="fas fa-link"></i></a><a href="#補充-自行閱讀-雙重指標的運算-double-pointer-arithmetic" class="headerlink" title="[補充 - 自行閱讀] 雙重指標的運算 (double pointer arithmetic)"></a>[補充 - 自行閱讀] 雙重指標的運算 (double pointer arithmetic)</h2>
+      <ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://edisonshih.pixnet.net/blog/post/27344592" >雙重指標運算與二維陣列</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+<p>給大家一些例子自己閱讀吧~<br>有問題歡迎來問我~</p>
+
+        <h3 id="一重指標的二維陣列運算"   >
+          <a href="#一重指標的二維陣列運算" class="heading-link"><i class="fas fa-link"></i></a><a href="#一重指標的二維陣列運算" class="headerlink" title="一重指標的二維陣列運算"></a>一重指標的二維陣列運算</h3>
+      <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> array[<span class="number">2</span>][<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p1 = &amp;array[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</span><br><span class="line">			cout &lt;&lt; *(p1+i*<span class="number">3</span>+j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="雙重指標的二維陣列運算"   >
+          <a href="#雙重指標的二維陣列運算" class="heading-link"><i class="fas fa-link"></i></a><a href="#雙重指標的二維陣列運算" class="headerlink" title="雙重指標的二維陣列運算"></a>雙重指標的二維陣列運算</h3>
+      <p>如果你真的搞懂了 precedence 跟結合性，請問第 11 行怎麼解讀呢?</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">(<span class="keyword">double</span> (*wh)[<span class="number">2</span>], <span class="keyword">int</span> sizeOfRow)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>; <span class="keyword">double</span> t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sizeOfRow; i++)&#123;</span><br><span class="line">    	<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)&#123;</span><br><span class="line">    		cout &lt;&lt; <span class="string">&quot;student&quot;</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">&quot; - &quot;</span>&lt;&lt;j&lt;&lt;<span class="string">&quot;:&quot;</span>;</span><br><span class="line">    		cin &gt;&gt; t;</span><br><span class="line">    		*(*(wh+i)+j) = t;</span><br><span class="line">            <span class="comment">// 如果寫 *(*wh+i+j) 結果會一樣嗎?</span></span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="keyword">if</span>(*(*(wh+i)+j) &lt;= <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">calculation</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> wh[<span class="number">3</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="built_in">input</span>(wh, <span class="number">3</span>);</span><br><span class="line">    <span class="keyword">double</span> max = <span class="number">0</span>, mini = <span class="number">0</span>, bmi = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">    	bmi = wh[i][<span class="number">0</span>]/(<span class="built_in">pow</span>(wh[i][<span class="number">1</span>], <span class="number">2</span>));</span><br><span class="line">    	cout &lt;&lt; bmi &lt;&lt; endl;</span><br><span class="line">    	<span class="keyword">if</span>(i==<span class="number">0</span>) mini = bmi;</span><br><span class="line">    	<span class="keyword">if</span>(max &lt; bmi) max = bmi;</span><br><span class="line">    	<span class="keyword">if</span>(mini &gt; bmi) mini = bmi;</span><br><span class="line">    &#125;</span><br><span class="line">    string a = <span class="string">&quot;max and bmi is &quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// to_string 只支援 C++11</span></span><br><span class="line">    a = a + <span class="built_in">to_string</span>(max) + <span class="string">&quot;,&quot;</span> + <span class="built_in">to_string</span>(mini); </span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(string a)</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">show</span>(<span class="built_in">calculation</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+        <h2 id="Reference"   >
+          <a href="#Reference" class="heading-link"><i class="fas fa-link"></i></a><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
+      <ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://medium.com/@racktar7743/c%E8%AA%9E%E8%A8%80-%E6%8C%87%E6%A8%99%E6%95%99%E5%AD%B8-%E4%B8%83-%E5%A4%9A%E9%87%8D%E6%8C%87%E6%A8%99-89854e6eae0b" >[C語言] 指標教學[七]: 多重指標</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://openhome.cc/Gossip/CGossip/Pointer.html" >指標與位址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+<p>很累吧，看個搞笑的文章放鬆一下</p>
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.privism.org/2012/06/blog-post.html" >台灣工程師常唸錯的英文單字</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/Untitled/">https://410735038.github.io/2022/05/29/Untitled/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/structure-%E7%B5%90%E6%A7%8B/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">structure 結構</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A/"><span class="paginator-prev__text">運算子的優先權</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%B2%E9%9A%8E%E6%8E%A2%E8%A8%8E-pointer-%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99-%E8%88%87-2-d-dynamic-array"><span class="toc-number"></span> <span class="toc-text">
+          進階探討 pointer 雙重指標!與 2-d dynamic array</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99%E8%AE%8A%E6%95%B8"><span class="toc-number"></span> <span class="toc-text">
+          雙重指標變數</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E6%8F%90%E9%86%92"><span class="toc-number"></span> <span class="toc-text">
+          小提醒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#precedence-%E5%84%AA%E5%85%88%E6%AC%8A%E8%88%87%E7%B5%90%E5%90%88%E6%80%A7"><span class="toc-number"></span> <span class="toc-text">
+          precedence 優先權與結合性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99%E8%AE%8A%E6%95%B8%E7%9A%84%E5%8F%96%E5%80%BC%E8%88%87%E5%8F%96%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">
+          雙重指標變數的取值與取址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8B%95%E6%85%8B%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%B6%AD%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          動態配置二維陣列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8B%95%E6%85%8B%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%B6%AD%E9%99%A3%E5%88%97%E7%9A%84%E8%AA%9E%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">
+          動態配置二維陣列的語法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8B%95%E6%85%8B%E9%85%8D%E7%BD%AE%E8%A8%98%E6%86%B6%E9%AB%94%EF%BC%8C%E7%94%A8%E5%AE%8C%E8%AB%8B%E5%9B%9E%E6%94%B6"><span class="toc-number"></span> <span class="toc-text">
+          動態配置記憶體，用完請回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%9C%E5%85%85-%E8%87%AA%E8%A1%8C%E9%96%B1%E8%AE%80-%E6%8C%87%E6%A8%99%E8%AE%8A%E6%95%B8%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          [補充 - 自行閱讀]指標變數陣列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85-%E8%87%AA%E8%A1%8C%E9%96%B1%E8%AE%80-%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99%E7%9A%84%E9%81%8B%E7%AE%97-double-pointer-arithmetic"><span class="toc-number"></span> <span class="toc-text">
+          [補充 - 自行閱讀] 雙重指標的運算 (double pointer arithmetic)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E9%87%8D%E6%8C%87%E6%A8%99%E7%9A%84%E4%BA%8C%E7%B6%AD%E9%99%A3%E5%88%97%E9%81%8B%E7%AE%97"><span class="toc-number"></span> <span class="toc-text">
+          一重指標的二維陣列運算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99%E7%9A%84%E4%BA%8C%E7%B6%AD%E9%99%A3%E5%88%97%E9%81%8B%E7%AE%97"><span class="toc-number"></span> <span class="toc-text">
+          雙重指標的二維陣列運算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number"></span> <span class="toc-text">
+          Reference</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

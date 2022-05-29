@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           程式設計師一輩子的工具 - 迴圈 for&#x2F;while&#x2F;do-while                           前言       迴圈可以說是程式設計師在開發時不可或缺的工具，迴圈能夠讓我們反覆執行一段程式，直到條件失敗或是我們終止這個迴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程式設計師一輩子的工具 - 迴圈 for&#x2F;while&#x2F;do-while">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%B8%80%E8%BC%A9%E5%AD%90%E7%9A%84%E5%B7%A5%E5%85%B7-%E8%BF%B4%E5%9C%88-for-while-do-while/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           程式設計師一輩子的工具 - 迴圈 for&#x2F;while&#x2F;do-while                           前言       迴圈可以說是程式設計師在開發時不可或缺的工具，迴圈能夠讓我們反覆執行一段程式，直到條件失敗或是我們終止這個迴">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/RVFvSye.png">
+<meta property="article:published_time" content="2022-05-29T09:10:14.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:28:01.468Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/RVFvSye.png"><title>程式設計師一輩子的工具 - 迴圈 for/while/do-while | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%B8%80%E8%BC%A9%E5%AD%90%E7%9A%84%E5%B7%A5%E5%85%B7-%E8%BF%B4%E5%9C%88-for-while-do-while/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">程式設計師一輩子的工具 - 迴圈 for/while/do-while</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="程式設計師一輩子的工具-迴圈-for-while-do-while"   >
+          <a href="#程式設計師一輩子的工具-迴圈-for-while-do-while" class="heading-link"><i class="fas fa-link"></i></a><a href="#程式設計師一輩子的工具-迴圈-for-while-do-while" class="headerlink" title="程式設計師一輩子的工具 - 迴圈 for/while/do-while"></a>程式設計師一輩子的工具 - 迴圈 for/while/do-while</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>迴圈可以說是程式設計師在開發時不可或缺的工具，迴圈能夠讓我們反覆執行一段程式，直到條件失敗或是我們終止這個迴圈，讓他不再執行。</p>
+<p>舉個實例，大家在玩遊戲時，除非你關閉遊戲，不然遊戲會一直執行，而一直執行這件事就是依靠迴圈。又或是今天你想算出 1 累加到 100 為多少，你也可以依靠迴圈幫你累加。</p>
+<p>像這樣:</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++)&#123;</span><br><span class="line">        ans += i; <span class="comment">// 答案是 5050</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>當然腦筋動得快的同學會說，這麼麻煩，直接梯形公式不就可以了嗎?幹嘛還要用到這個迴圈?<br>確實，這是最正確的思維，可是今天若只單純地用梯形公式，我們的程式會被限縮，他就只能這做這件事，但今天一個迴圈可能會做的事不只這一件，甚至是要利用其中的值來為我們做其他的運算，比方說，程式執行加到第 30 次的時候要印出，今天天氣真好，那就不可能用梯形公式做出來。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">1</span>, upper = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    ans = (low+upper)*(upper+low<span class="number">-1</span>)/<span class="number">2</span>; <span class="comment">//也是 5050</span></span><br><span class="line">    <span class="comment">//但能做的事非常限縮</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++)&#123;</span><br><span class="line">        ans += i; <span class="comment">// 答案是 5050</span></span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">30</span>) cout &lt;&lt; <span class="string">&quot;今天天氣真好\n&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;我是偶數次\n&quot;</span>;</span><br><span class="line">        <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;我是奇數次\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//用迴圈的話我們能夠額外做很多事</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>這就是<strong>為什麼要學習迴圈</strong>，<strong>因為程式能夠做擴充，而且能夠增加易讀性</strong>，真的是非常方便的工具，請一定要學起來。</p>
+<span id="more"></span>
+
+
+        <h2 id="for"   >
+          <a href="#for" class="heading-link"><i class="fas fa-link"></i></a><a href="#for" class="headerlink" title="for"></a>for</h2>
+      <p><code>tips: 很早就說過，程式語言很多事情語法是固定的沒有為什麼， for 就是最好的例子</code></p>
+<p>語法格式:</p>
+<p><img src="https://i.imgur.com/RVFvSye.png"></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(初值; 條件; 步進)&#123;</span><br><span class="line">    //迴圈細節</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>解釋:</p>
+<ul>
+<li><strong>初值</strong><ul>
+<li>迴圈要從哪個值開始</li>
+</ul>
+</li>
+<li><strong>條件</strong><ul>
+<li>當初值經過迴圈一次次的改變，違反條件的時候迴圈結束，若滿足條件則繼續執行</li>
+</ul>
+</li>
+<li><strong>步進</strong><ul>
+<li>初值每次增加多少</li>
+</ul>
+</li>
+</ul>
+<p>範例:<br>就以剛才 1 累加到 100 為例，我們來了解迴圈的運作。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++)&#123;</span><br><span class="line">        ans += i; <span class="comment">// 答案是 5050</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li>初值為 1</li>
+<li>條件為當 i &lt;= 100 就會執行迴圈內容，若否則不會結束迴圈</li>
+<li>步進 i++，i 值每次加 1</li>
+</ul>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>次數</th>
+<th align="center">ans</th>
+<th align="center">i值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center">ans = 0 + 1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">ans = 1 + 2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">ans = 3 + 3</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">ans = 6 + 4</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">ans = 10 + 5</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">ans = 15 + 6</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">ans = 21 + 7</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td>100</td>
+<td align="center">ans = 4950 + 100</td>
+<td align="center">100</td>
+</tr>
+</tbody></table></div>
+<p>這邊可能會比較疑惑的點是 ans 的地方，ans 會被反覆的更改，而我們講過「=」代表的是指派，所以每次會把上一次的值指派給 ans，把舊的蓋過去。</p>
+
+        <h2 id="while"   >
+          <a href="#while" class="heading-link"><i class="fas fa-link"></i></a><a href="#while" class="headerlink" title="while"></a>while</h2>
+      <p>while 也是迴圈的一種，我們等等會來談談兩者的使用時機，我們先來看看 while 是什麼。</p>
+<p>語法格式:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">初值</span><br><span class="line">while(條件)&#123;</span><br><span class="line">/*while 迴圈內容</span><br><span class="line"> * </span><br><span class="line"> * </span><br><span class="line"> * </span><br><span class="line"> * */</span><br><span class="line"></span><br><span class="line"> 步進</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>我們同樣用累加到 100 作為範例。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初值</span></span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">1</span>, upper = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= <span class="number">100</span>)&#123; <span class="comment">// 條件</span></span><br><span class="line">        ans = ans + low; <span class="comment">// 迴圈細節</span></span><br><span class="line">        low++; <span class="comment">// 步進</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>而這裡的初值、條件、步進與 for 完全相同，所以其實我們可以得到一個小結論，只要能用 for 寫的迴圈，就一定可以用 while 寫，因為只有一些語法的不同而已。</p>
+<p><strong>while的注意事項:</strong></p>
+<ul>
+<li>初值要在進入 while 迴圈前先被指派，<strong>不能放在迴圈內</strong><ul>
+<li><strong>放在迴圈內的話每一次都會被更新為初值喔</strong></li>
+</ul>
+</li>
+<li>通常步進一定會放在最後 (當然要看你的需求怎麼設計，也有可能不會滿足這件事)</li>
+</ul>
+
+        <h2 id="do-while"   >
+          <a href="#do-while" class="heading-link"><i class="fas fa-link"></i></a><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h2>
+      <p>do-while 與 while 只有一點小差別，我們先看 do-while 的語法。</p>
+<p>語法格式:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">初值</span><br><span class="line">do&#123;</span><br><span class="line">    /*                </span><br><span class="line">    迴圈細節                        </span><br><span class="line">    */</span><br><span class="line">    步進</span><br><span class="line">&#125;while(條件);</span><br></pre></td></tr></table></div></figure>
+<p><strong>do-while 與 while 的差異在於，do-while 一定會執行迴圈一次，而 while 有可能不會執行，只要不滿足條件。</strong><br>所以在 do 的這個範圍內代表的就是 while 的程式細節，只是我一定會先執行一次。所以可以看你遇到的需求適合用哪一種迴圈就使用哪一種。</p>
+<p>舉個小例子，因為疫情都需要實名制，若是兩人或以上同行可以選擇只留下一個人的資料，但你不能不留資料(就表示一定要執行一次)，透過這樣的思維，我們可以寫下如下的程式。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> keep = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    string name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    string the_phone_last_three_word = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;請留下以下的資料哦&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;你的大名?&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cin &gt;&gt; name;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;請輸入您的手機末三碼&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cin &gt;&gt; the_phone_last_three_word;</span><br><span class="line">        </span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;還要繼續輸入嗎?\n&quot;</span></span><br><span class="line">            &lt;&lt; <span class="string">&quot;要繼續請輸入 y \n&quot;</span></span><br><span class="line">            &lt;&lt; <span class="string">&quot;若不用請輸入任意字元終止 \n&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        cin &gt;&gt; keep;</span><br><span class="line">    </span><br><span class="line">    &#125;<span class="keyword">while</span>(keep == <span class="string">&#x27;y&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;程式結束&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>因為一定會執行一次，所以當程式執行時 8-17 行一定會執行一次，當 19 行的條件成立，再從 8 執行到 17 行，周而復始，直到條件不成立為止。</p>
+<p>你會發現，用 do-while 有可能甚至不用初值，完全端看需求是什麼，相信這個例子能夠更幫大家了解 do-while 的內容。</p>
+
+        <h2 id="for、while-的使用時機"   >
+          <a href="#for、while-的使用時機" class="heading-link"><i class="fas fa-link"></i></a><a href="#for、while-的使用時機" class="headerlink" title="for、while 的使用時機"></a>for、while 的使用時機</h2>
+      <p>兩個都是迴圈，能夠做到的事也相同，究竟差在哪裏呢? 就是使用時機，透過上面的例子我們可以發現，使用 for 的時候我們會先明訂我們會做幾次，但 while 卻不會，這也就是兩者的最大使用差異。</p>
+<p>何時用 for ?</p>
+<ul>
+<li><strong>當你知道明確的執行次數時</strong></li>
+</ul>
+<p>何時用 while ?</p>
+<ul>
+<li><strong>當不知道明確的執行次數時</strong></li>
+</ul>
+<blockquote>
+<p>結論:兩種你都要會<br>[name=orange]</p>
+</blockquote>
+
+        <h2 id="補充-遞增與遞減-、"   >
+          <a href="#補充-遞增與遞減-、" class="heading-link"><i class="fas fa-link"></i></a><a href="#補充-遞增與遞減-、" class="headerlink" title="補充 - 遞增與遞減 ++、--"></a>補充 - 遞增與遞減 <code>++</code>、<code>--</code></h2>
+      <p>相信在看迴圈時 <code>++</code>、<code>--</code> 這兩個運算子影響了不少人，雖然你明確的知道了他就是往上 +1，但其實它沒有想像中那麼簡單哦。</p>
+
+        <h3 id="放前與放後，兩者大不同"   >
+          <a href="#放前與放後，兩者大不同" class="heading-link"><i class="fas fa-link"></i></a><a href="#放前與放後，兩者大不同" class="headerlink" title="放前與放後，兩者大不同"></a>放前與放後，兩者大不同</h3>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th align="center">前置式</th>
+<th align="center">後置式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">先做<code>++</code> <code>--</code> 再取值</td>
+<td align="center">先取值，再做 <code>++</code> <code>--</code></td>
+</tr>
+<tr>
+<td align="center"><code>++i</code> <code>--i</code></td>
+<td align="center"><code>i++</code> <code>i--</code></td>
+</tr>
+</tbody></table></div>
+<p>相信這樣看一定看不懂，我們直接舉例，</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> A = <span class="number">5</span>, B = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> x = A++;</span><br><span class="line">    <span class="keyword">int</span> y = ++B;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; x &lt;&lt; endl; <span class="comment">// 5</span></span><br><span class="line">    cout &lt;&lt; y &lt;&lt; endl; <span class="comment">// 6</span></span><br><span class="line">    cout &lt;&lt; A &lt;&lt; endl; <span class="comment">// 6</span></span><br><span class="line">    cout &lt;&lt; B &lt;&lt; endl; <span class="comment">// 6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>透過上面的表格，我們理解前置式跟後置式的差異，所以第三行後置式，先做取值再做 +1，所以我們先把 A 指派給變數 x，再把 A 做 +1 的動作，因此 x 會印出 5，A 會印出 6。<br>那前置式就同理可證。先做 +1 再指派。</p>
+
+        <h2 id="無窮迴圈"   >
+          <a href="#無窮迴圈" class="heading-link"><i class="fas fa-link"></i></a><a href="#無窮迴圈" class="headerlink" title="無窮迴圈"></a>無窮迴圈</h2>
+      <p>無窮迴圈常常發生在遊戲開發中，因為你總不希望玩遊戲玩到一半忽然關掉吧。<br>for 跟 while 都有無窮迴圈的樣子，學過 if-else，你們覺得應該會長什麼樣子呢?</p>
+<ul>
+<li>for<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(;true;)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;    </span><br><span class="line">又或是    </span><br><span class="line">for(;;)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li>while<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while(true)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+這邊看的出來，當條件恆成立的時候，我們就會一直執行迴圈內的內容，但是無窮迴圈不可能不終止掉的，你玩遊戲也會有想結束的時候，如果今天一個無窮迴圈沒有設立終止條件，你的電腦是會當機的。所以接下來我們來談談下面的關鍵字。
+        <h2 id="不要再執行了-迴圈終止工具-break、continue"   >
+          <a href="#不要再執行了-迴圈終止工具-break、continue" class="heading-link"><i class="fas fa-link"></i></a><a href="#不要再執行了-迴圈終止工具-break、continue" class="headerlink" title="不要再執行了!迴圈終止工具 break、continue"></a>不要再執行了!迴圈終止工具 break、continue</h2>
+      </li>
+</ul>
+<p>在談到迴圈，不可避免一定要提這兩個保留字，因為他是能夠幫我們終止迴圈的好幫手，我們馬上來談談。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th align="center">break</th>
+<th align="center">continue</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">完全終止迴圈</td>
+<td align="center">終止這一次的迴圈，執行下一次</td>
+</tr>
+</tbody></table></div>
+<p>舉個例子</p>
+<ul>
+<li>break<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        a++;</span><br><span class="line">        cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">if</span>(a&gt;<span class="number">10</span>)<span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+我相信應該不難理解吧!當 a &gt; 10的時候，這個迴圈就會結束。</li>
+<li>continue<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        a++;</span><br><span class="line">        <span class="keyword">if</span>(a % <span class="number">2</span> == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">if</span>(a&gt;<span class="number">100</span>)<span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+這應該也不難理解，當 a 是偶數的時候會進入第一個 if 判斷式，因為遇到 continue，所以第 6 行開始都不執行了，直接從第 3 行再來執行，因為 while(true) 條件必成立，就再執行下一次。</li>
+</ul>
+<blockquote>
+<p>可以把程式碼 run 在自己的電腦上看看結果是什麼<br>你覺得 a 最後一個是印出 99 還是 101 呢?<br>答案可能不如你所想喔<br>[name=orange]</p>
+</blockquote>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%B8%80%E8%BC%A9%E5%AD%90%E7%9A%84%E5%B7%A5%E5%85%B7-%E8%BF%B4%E5%9C%88-for-while-do-while/">https://410735038.github.io/2022/05/29/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%B8%80%E8%BC%A9%E5%AD%90%E7%9A%84%E5%B7%A5%E5%85%B7-%E8%BF%B4%E5%9C%88-for-while-do-while/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/%E4%BE%86%E4%BA%86%E8%A7%A3-C-%E7%9A%84%E4%BF%9D%E7%95%99%E5%AD%97/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">來了解 C++ 的保留字</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/%E9%81%8B%E7%AE%97%E5%85%83%E8%88%87%E9%81%8B%E7%AE%97%E5%AD%90/"><span class="paginator-prev__text">運算元與運算子</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E4%B8%80%E8%BC%A9%E5%AD%90%E7%9A%84%E5%B7%A5%E5%85%B7-%E8%BF%B4%E5%9C%88-for-while-do-while"><span class="toc-number"></span> <span class="toc-text">
+          程式設計師一輩子的工具 - 迴圈 for&#x2F;while&#x2F;do-while</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for"><span class="toc-number"></span> <span class="toc-text">
+          for</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#while"><span class="toc-number"></span> <span class="toc-text">
+          while</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do-while"><span class="toc-number"></span> <span class="toc-text">
+          do-while</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for%E3%80%81while-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="toc-number"></span> <span class="toc-text">
+          for、while 的使用時機</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85-%E9%81%9E%E5%A2%9E%E8%88%87%E9%81%9E%E6%B8%9B-%E3%80%81"><span class="toc-number"></span> <span class="toc-text">
+          補充 - 遞增與遞減 ++、--</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BE%E5%89%8D%E8%88%87%E6%94%BE%E5%BE%8C%EF%BC%8C%E5%85%A9%E8%80%85%E5%A4%A7%E4%B8%8D%E5%90%8C"><span class="toc-number"></span> <span class="toc-text">
+          放前與放後，兩者大不同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%A1%E7%AA%AE%E8%BF%B4%E5%9C%88"><span class="toc-number"></span> <span class="toc-text">
+          無窮迴圈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E5%86%8D%E5%9F%B7%E8%A1%8C%E4%BA%86-%E8%BF%B4%E5%9C%88%E7%B5%82%E6%AD%A2%E5%B7%A5%E5%85%B7-break%E3%80%81continue"><span class="toc-number"></span> <span class="toc-text">
+          不要再執行了!迴圈終止工具 break、continue</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

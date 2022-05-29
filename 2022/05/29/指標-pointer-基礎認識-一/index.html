@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           指標 pointer 基礎認識(一)                           前言       指標可以說是 C++ 的超級大魔王，指標變數怎麼指、到底指到誰身上、記憶體位置到底存誰的，概念是有點難理解的，到了大四我仍沒辦法完全搞懂他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指標 pointer 基礎認識(一)">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%B8%80/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           指標 pointer 基礎認識(一)                           前言       指標可以說是 C++ 的超級大魔王，指標變數怎麼指、到底指到誰身上、記憶體位置到底存誰的，概念是有點難理解的，到了大四我仍沒辦法完全搞懂他">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/UacJFXL.png">
+<meta property="og:image" content="https://i.imgur.com/PngbRsx.png">
+<meta property="og:image" content="https://i.imgur.com/DlAwq3n.png">
+<meta property="og:image" content="https://i.imgur.com/IfNgleN.png">
+<meta property="article:published_time" content="2022-05-29T09:35:20.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:35:43.432Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/UacJFXL.png"><title>指標 pointer 基礎認識(一) | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%B8%80/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">指標 pointer 基礎認識(一)</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="指標-pointer-基礎認識-一"   >
+          <a href="#指標-pointer-基礎認識-一" class="heading-link"><i class="fas fa-link"></i></a><a href="#指標-pointer-基礎認識-一" class="headerlink" title="指標 pointer 基礎認識(一)"></a>指標 pointer 基礎認識(一)</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>指標可以說是 C++ 的超級大魔王，指標變數怎麼指、到底指到誰身上、記憶體位置到底存誰的，概念是有點難理解的，到了大四我仍沒辦法完全搞懂他，但我一定會盡全力把該學到的講給你們聽，同時去看 reference 多參考網路上多位大神的解釋會更好。</p>
+<p><span style="color:red"><strong>參考資料二非常建議閱讀!!</strong></span></p>
+<span id="more"></span>
+
+
+        <h2 id="基本觀念釐清-何為變數、何為變數值、何為指標、如何取址"   >
+          <a href="#基本觀念釐清-何為變數、何為變數值、何為指標、如何取址" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本觀念釐清-何為變數、何為變數值、何為指標、如何取址" class="headerlink" title="基本觀念釐清: 何為變數、何為變數值、何為指標、如何取址"></a>基本觀念釐清: 何為變數、何為變數值、何為指標、如何取址</h2>
+      <blockquote>
+<p><span style="color:red"><strong>甚麼樣的資料型態(變數型態)存什麼樣的資料，這個大前提請千萬不要忘記</strong></span></p>
+</blockquote>
+
+        <h3 id="變數"   >
+          <a href="#變數" class="heading-link"><i class="fas fa-link"></i></a><a href="#變數" class="headerlink" title="變數"></a>變數</h3>
+      <p>變數由四個最重要的東西所組成，分別是變數型態、變數值、變數名稱、變數位址，請看以下表格與說明。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>變數型態</th>
+<th>變數位址</th>
+<th>變數值</th>
+<th>變數名稱</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>0x6ffe08</td>
+<td>9</td>
+<td>a1</td>
+</tr>
+<tr>
+<td>string</td>
+<td>0x6ffe00</td>
+<td>Orange</td>
+<td>s1</td>
+</tr>
+<tr>
+<td>double</td>
+<td>0x6ffdf8</td>
+<td>7.3</td>
+<td>d1</td>
+</tr>
+<tr>
+<td>float</td>
+<td>0x6ffdf4</td>
+<td>6.5f</td>
+<td>f1</td>
+</tr>
+</tbody></table></div>
+<p><img src="https://i.imgur.com/UacJFXL.png"></p>
+<ul>
+<li>變數位址<ul>
+<li>在你程式執行後，變數儲存在記憶體的位置</li>
+</ul>
+</li>
+<li>變數值<ul>
+<li>該變數儲存的值，int 存整數，string 存字串</li>
+</ul>
+</li>
+<li>變數名稱<ul>
+<li>使用者對變數做一個自定義名字的動作</li>
+</ul>
+</li>
+</ul>
+<p>而根據你的型態不同，所需的記憶體用量也不同，以整數為例，一個整數就是佔 4 bytes 的空間。</p>
+
+        <h3 id="指標"   >
+          <a href="#指標" class="heading-link"><i class="fas fa-link"></i></a><a href="#指標" class="headerlink" title="指標"></a>指標</h3>
+      <p>變數位址負責讓你找到你的這個變數在電腦的哪裡，而<strong>變數位址就是變數的指標</strong>!簡單的說，變數的位址就是「<strong>指向該變數的指標</strong>」。<span style="color:red"><strong>這句話很重要!!</strong></span></p>
+<p><strong>而這邊說的是指標，而不是指標變數，請不要把兩者混為一談哦!!!</strong></p>
+
+        <h3 id="取址與參考變數大不同"   >
+          <a href="#取址與參考變數大不同" class="heading-link"><i class="fas fa-link"></i></a><a href="#取址與參考變數大不同" class="headerlink" title="取址與參考變數大不同!!"></a>取址與參考變數大不同!!</h3>
+      <p>那既然我們這麼大費周章地跟你說了變數位址，自然就是可以被拿來用的東西，未來我們可以親自的來操控記憶體，那既然要操控，我們就要取得他。</p>
+<p>要做到取得記憶體位址，需要利用取址運算子「<code>&amp;</code>」，透過在變數前面加上這個符號以取得變數的記憶體位址。</p>
+<ul>
+<li><p><span style="color:red"><strong>要取得位置，取址運算子請一定是與宣告分開的哦!</strong></span></p>
+  <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">cout &lt;&lt; &amp;a; <span class="comment">//印出 a 的記憶體位址</span></span><br></pre></td></tr></table></div></figure></li>
+<li><p><span style="color:red"><strong>請注意，請千萬不要像下面這樣寫!!!</strong></span></p>
+  <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;a = <span class="number">5</span>; <span class="comment">// 程式會報錯，Error</span></span><br></pre></td></tr></table></div></figure>
+<p>  還記得我們有教過如何宣告參考變數 (reference variable)，你可以為變數取一個別    名，所以你在變數宣告的時候這樣寫，是告訴程式說你宣告一個參考變數，並不是取    得一個變數所在的記憶體位置哦!<br>  然而上面這樣寫也不是正確的參考變數宣告，參考變數是為「一個變數」取別名，然而你指派常數給他，是錯誤的，參考變數的宣告一定要接受「變數」，像這樣。</p>
+  <figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;a_new = a;</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+
+        <h2 id="何為指標變數-pointer-variable"   >
+          <a href="#何為指標變數-pointer-variable" class="heading-link"><i class="fas fa-link"></i></a><a href="#何為指標變數-pointer-variable" class="headerlink" title="何為指標變數(pointer variable)?"></a>何為指標變數(pointer variable)?</h2>
+      <p>上面都可以的話接下來來真的談談指標變數吧!</p>
+<p>前面已經強調，指標(pointer)就是某個變數的記憶體位址，而指標變數(pointer variable)，則是「用來存放指標的變數」。</p>
+<p>有點文字遊戲對吧，所以我們先從前面來。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">整數變數儲存整數</span><br><span class="line">浮點數變數儲存浮點數</span><br><span class="line">字串變數儲存字串</span><br><span class="line">字元變數儲存字元</span><br></pre></td></tr></table></div></figure>
+<blockquote>
+<p>那指標變數儲存甚麼?<br>儲存指標!!!<br>[name=Orange]</p>
+</blockquote>
+
+        <h3 id="如何宣告、初始化、設值給指標變數"   >
+          <a href="#如何宣告、初始化、設值給指標變數" class="heading-link"><i class="fas fa-link"></i></a><a href="#如何宣告、初始化、設值給指標變數" class="headerlink" title="如何宣告、初始化、設值給指標變數"></a>如何宣告、初始化、設值給指標變數</h3>
+      <p>如果對於指標變數儲存的東西到底是甚麼你已經理解了，接下來來看看如何宣告他。</p>
+<ul>
+<li>全新符號 <code>*</code> ，其有兩種意義<ul>
+<li><strong>指標</strong><ul>
+<li>在<strong>變數宣告</strong>時出現，是<strong>為了宣告指標</strong></li>
+<li>告訴程式此變數是一個「指標變數」</li>
+<li>其內容存的是一個記憶體位址</li>
+</ul>
+</li>
+<li><strong>取值運算子(Dereference operator)</strong><ul>
+<li>在<strong>宣告以外</strong>的場合出現，是<strong>為了取出指標所指向的位址的值</strong></li>
+<li>依照變數所存的記憶體位址，去那個位址把資料取出來</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>; <span class="comment">// 假設位於 0x6ffe0c</span></span><br><span class="line"><span class="keyword">int</span> *p1; <span class="comment">// 宣告不給值，之後才給值</span></span><br><span class="line">p1 = &amp;a; <span class="comment">// 把 a 變數的位址 0x6ffe0c 存到 p1 內</span></span><br><span class="line">**-----------我是分隔線------------**</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a; <span class="comment">// 宣告即給值，把 a 變數的位址 0x6ffe0c 存到 p1 內</span></span><br></pre></td></tr></table></div></figure>
+
+<p>指標變數的宣告方式呢，是在變數型態跟名稱中間加上一個 <code>*</code> 號，這樣就是宣告指標變數，而因為他必須接受一個記憶體位址，所以你只能要傳位址給他。</p>
+<p>透過上文我們已經知道指標變數儲存指標，而指標又是指一個變數的記憶體位址，所以對於 p1 這個指標變數，就是存變數 a 的記憶體位址。示意圖如下:<br><img src="https://i.imgur.com/PngbRsx.png"></p>
+<p>而今天一個變數如果他被宣告，他會需要記憶體去儲存他，所以指標變數本身需要一個記憶體，而他裡面儲存的是一個指標(記憶體位址)。</p>
+<blockquote>
+<p>學這邊真的在玩繞口令…<br>[name=Orange]</p>
+</blockquote>
+
+        <h2 id="如何取值-取出誰的值"   >
+          <a href="#如何取值-取出誰的值" class="heading-link"><i class="fas fa-link"></i></a><a href="#如何取值-取出誰的值" class="headerlink" title="如何取值? 取出誰的值?"></a>如何取值? 取出誰的值?</h2>
+      <p>針對一般的整數變數、字串變數，要取值時我們都只要打他的名字即可，指標變數也同理，如果要取出他儲存的變數值，也是打他的名字。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;[整數]變數 a 所儲存的[整數]: &quot;</span> &lt;&lt; a &lt;&lt; endl; <span class="comment">//印出 a 就是一種取值了哦!</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;[整數]變數 a 所處的記憶體位址(也就是指標): &quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;[指標]變數 p1 所儲存的[指標](指標變數存記憶體位址): &quot;</span> &lt;&lt; p1 &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;[指標]變數本身所屬的記憶體位址: &quot;</span> &lt;&lt; &amp;p1 &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; <span class="string">&quot;[指標]變數 p1 所儲存的[指標]指向的值: &quot;</span> &lt;&lt; *p1 &lt;&lt; endl;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="https://i.imgur.com/DlAwq3n.png"></p>
+<p>相信看到這裡你已經知道我們說的指標變數取值是取出誰的值了!<strong>就是指標變數所儲存的指標指向的值!!!</strong> 用一張圖可以這樣解釋(紅筆對紅筆，藍筆對藍筆)。</p>
+<p><img src="https://i.imgur.com/IfNgleN.png"></p>
+<p>最後一個最重要的提醒，<span style="color:red"><strong>指標</strong></span>跟<span style="color:red"><strong>指標變數</strong></span>是兩個<span style="color:red"><strong>完全不一樣</strong></span>的東西，請你一定要搞清楚，不然進入雙重指標就再見了哦!</p>
+<blockquote>
+<p>指標是_________?<br>指標變數是__________?<br>大家自己填空想想看吧，忘了麻煩一定要往上回去看!<br>[name=Orange]</p>
+</blockquote>
+
+        <h2 id="小總結整理"   >
+          <a href="#小總結整理" class="heading-link"><i class="fas fa-link"></i></a><a href="#小總結整理" class="headerlink" title="小總結整理"></a>小總結整理</h2>
+      <ul>
+<li>指標的宣告<ul>
+<li>type *name;</li>
+<li>type *name = address;</li>
+<li>type *name1, *name2, *name3;</li>
+</ul>
+</li>
+<li>指標的取值<ol>
+<li>指標變數如同一般的變數，取值就是打名字(取出這個指標變數儲存的位址(指標))<ul>
+<li>name</li>
+</ul>
+</li>
+<li>存取指標變數儲存的位址所指向的記憶體空間所儲存的值，<span style="color:red"><strong>在前面加上米字號，切記與宣告不同!</strong></span><ul>
+<li>*name</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>如何取址<ul>
+<li>在任何的變數面前加上 <code>&amp;</code><ul>
+<li>切記不能在宣告的時候加</li>
+</ul>
+</li>
+<li>可以把一個指標變數儲存的指標給另一個指標變數<ul>
+<li><code>name1 = name2</code></li>
+<li>把 name2 指標變數儲存的記憶體位址也給 name1<br>所以現在兩個指標變數內都存相同的記憶體位址
+        <h2 id="Reference-由淺入深"   >
+          <a href="#Reference-由淺入深" class="heading-link"><i class="fas fa-link"></i></a><a href="#Reference-由淺入深" class="headerlink" title="Reference 由淺入深"></a>Reference 由淺入深</h2>
+      </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:green"><strong>越上面越簡單</strong></span></p>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://openhome.cc/Gossip/CppGossip/Pointer.html" >參考 - 1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://kopu.chat/c%e8%aa%9e%e8%a8%80-%e8%b6%85%e5%a5%bd%e6%87%82%e7%9a%84%e6%8c%87%e6%a8%99%ef%bc%8c%e5%88%9d%e5%ad%b8%e8%80%85%e8%ab%8b%e9%80%b2%ef%bd%9e/" >參考 - 2 雖然是用 C 語言(不是 C++)，但概念一模一樣，可專注在內文</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://vinesmsuic.github.io/2019/08/14/c++-pointer/#const%E6%8C%87%E9%87%9D-const-pointer" >參考 - 3</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>比較難的參考資料<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://squall.cs.ntou.edu.tw/cprog/materials/Pointers2.html" >丁培毅老師</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%B8%80/">https://410735038.github.io/2022/05/29/%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%B8%80/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%BA%8C/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">指標 pointer 基礎認識(二)</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/%E9%80%B2%E9%9A%8E-vector%EF%BC%8C%E7%96%8A%E4%BB%A3%E5%99%A8%E8%88%87-insert-erase/"><span class="paginator-prev__text">進階 vector，疊代器與 insert / erase</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E6%A8%99-pointer-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-%E4%B8%80"><span class="toc-number"></span> <span class="toc-text">
+          指標 pointer 基礎認識(一)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%A7%80%E5%BF%B5%E9%87%90%E6%B8%85-%E4%BD%95%E7%82%BA%E8%AE%8A%E6%95%B8%E3%80%81%E4%BD%95%E7%82%BA%E8%AE%8A%E6%95%B8%E5%80%BC%E3%80%81%E4%BD%95%E7%82%BA%E6%8C%87%E6%A8%99%E3%80%81%E5%A6%82%E4%BD%95%E5%8F%96%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">
+          基本觀念釐清: 何為變數、何為變數值、何為指標、如何取址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8"><span class="toc-number"></span> <span class="toc-text">
+          變數</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%A8%99"><span class="toc-number"></span> <span class="toc-text">
+          指標</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E5%9D%80%E8%88%87%E5%8F%83%E8%80%83%E8%AE%8A%E6%95%B8%E5%A4%A7%E4%B8%8D%E5%90%8C"><span class="toc-number"></span> <span class="toc-text">
+          取址與參考變數大不同!!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E7%82%BA%E6%8C%87%E6%A8%99%E8%AE%8A%E6%95%B8-pointer-variable"><span class="toc-number"></span> <span class="toc-text">
+          何為指標變數(pointer variable)?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%A3%E5%91%8A%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E8%A8%AD%E5%80%BC%E7%B5%A6%E6%8C%87%E6%A8%99%E8%AE%8A%E6%95%B8"><span class="toc-number"></span> <span class="toc-text">
+          如何宣告、初始化、設值給指標變數</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8F%96%E5%80%BC-%E5%8F%96%E5%87%BA%E8%AA%B0%E7%9A%84%E5%80%BC"><span class="toc-number"></span> <span class="toc-text">
+          如何取值? 取出誰的值?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%B8%BD%E7%B5%90%E6%95%B4%E7%90%86"><span class="toc-number"></span> <span class="toc-text">
+          小總結整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference-%E7%94%B1%E6%B7%BA%E5%85%A5%E6%B7%B1"><span class="toc-number"></span> <span class="toc-text">
+          Reference 由淺入深</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

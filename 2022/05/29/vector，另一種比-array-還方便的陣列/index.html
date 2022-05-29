@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           vector，另一種比 array 還方便的陣列                           前言       參考文章請見最下面，這兩篇寫得非常好!! 上學期我們學過了最基礎的一般陣列，有特別強調說，他是在靜態時期編譯起來你就必須給他直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vector，另一種比 array 還方便的陣列">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/vector%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%AF%94-array-%E9%82%84%E6%96%B9%E4%BE%BF%E7%9A%84%E9%99%A3%E5%88%97/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           vector，另一種比 array 還方便的陣列                           前言       參考文章請見最下面，這兩篇寫得非常好!! 上學期我們學過了最基礎的一般陣列，有特別強調說，他是在靜態時期編譯起來你就必須給他直">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/nwu4CXl.gif">
+<meta property="og:image" content="https://i.imgur.com/C5HydOv.png">
+<meta property="og:image" content="https://i.imgur.com/dJTJQTA.png">
+<meta property="og:image" content="https://i.imgur.com/TecbpkN.png">
+<meta property="og:image" content="https://i.imgur.com/vsYZHbF.png">
+<meta property="og:image" content="https://i.imgur.com/PEZKklw.png">
+<meta property="article:published_time" content="2022-05-29T09:32:59.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:33:10.662Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/nwu4CXl.gif"><title>vector，另一種比 array 還方便的陣列 | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/vector%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%AF%94-array-%E9%82%84%E6%96%B9%E4%BE%BF%E7%9A%84%E9%99%A3%E5%88%97/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Orange</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">文章列表</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">vector，另一種比 array 還方便的陣列</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="vector，另一種比-array-還方便的陣列"   >
+          <a href="#vector，另一種比-array-還方便的陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector，另一種比-array-還方便的陣列" class="headerlink" title="vector，另一種比 array 還方便的陣列"></a>vector，另一種比 array 還方便的陣列</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p><span style="color:red"><strong>參考文章請見最下面，這兩篇寫得非常好!!</strong></span></p>
+<p>上學期我們學過了最基礎的一般陣列，有特別強調說，他是在靜態時期編譯起來你就必須給他直接長度的，不能透過輸入賦予長度，雖然在某些 compiler 會過，但其實這件事情是不被大家所允許的。</p>
+<p>接下來的 vector 就是動態的配置陣列大小給陣列，不用去操心記憶體，或是程式出錯，完全會自動配置大小，是非常好用的一個工具。</p>
+<p>而 vector 是 array 的進階版，所以他還是一種 array，仍舊是連續配置記憶體，當容量不夠的時候會重新申請空間，並把原本的資料複製或搬到新的記憶體去。</p>
+<p>但這樣有點不好，如果今天我們一直往 vector 裡面丟東西，一旦容量不夠，他可能會一直搬來搬去，其實有點沒有效率，因為他會一直釋放資源，添加資源，所以應該減少他配置新空間的次數。</p>
+<p>上面這句話簡單的說就是，針對需求，可以配置比需求<strong>多一倍</strong>的空間，會是比較適當的。</p>
+<span id="more"></span>
+
+
+        <h2 id="vector-library-引入"   >
+          <a href="#vector-library-引入" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-library-引入" class="headerlink" title="vector library 引入"></a>vector library 引入</h2>
+      <p>要使用 vector，請務必要 <code>#include &lt;vector&gt;</code> 這個 Library 進來!</p>
+
+        <h2 id="vector-常用功能摘要"   >
+          <a href="#vector-常用功能摘要" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-常用功能摘要" class="headerlink" title="vector 常用功能摘要"></a>vector 常用功能摘要</h2>
+      <p><span style="color:red;font-size:25px"><strong>只是摘要，功能還有更多哦!</strong></span></p>
+<p>既然是陣列，他就是一種容器，空間就很重要，所以針對常用功能做摘要說明，下面會再細部的用例子帶大家理解。</p>
+<ul>
+<li><p><strong>Capacity，容量相關</strong></p>
+<ul>
+<li><code>size()</code> 回傳陣列(vector)目前的長度</li>
+<li><code>empty()</code> 看陣列是不是空的，如果 size 為 0 則回傳 true/1，反之則回傳 false/0</li>
+<li><code>reserve()</code> 預先配置大小</li>
+</ul>
+</li>
+<li><p><strong>Modifiers，修飾器，針對放資料進陣列或從陣列移除資料</strong></p>
+<ul>
+<li><code>push_back()</code> 放資料到 vector 的最後面</li>
+<li><code>pop_back()</code> 從最後面刪除一個資料</li>
+<li><code>insert()</code> 插入資料進 vector</li>
+<li><code>erase()</code> 從 vector 內移除資料</li>
+<li><code>clear()</code> 清空 vector</li>
+</ul>
+</li>
+<li><p><strong>Iterators，疊代器，用來把指針指到我們要的位置</strong></p>
+<ul>
+<li><code>begin()</code> 把疊代器指向第一個元素</li>
+<li><code>end()</code> 把疊代器指向最後一個元素的下一個位置<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15252002/what-is-the-past-the-end-iterator-in-stl-c" >What is the past-the-end iterator in STL C++?</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Element Access，存取元素</strong></p>
+<ul>
+<li><code>at(i)</code> 回傳參數索引值所在位置的值</li>
+<li><code>front()</code> 回傳 vector 頭的值</li>
+<li><code>back()</code> 回傳 vector 尾的值</li>
+<li><code>[i]</code> 與 at 的用法相似，取得索引值位置的值</li>
+</ul>
+</li>
+</ul>
+
+        <h2 id="vector-宣告與初始化"   >
+          <a href="#vector-宣告與初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-宣告與初始化" class="headerlink" title="vector 宣告與初始化!"></a>vector 宣告與初始化!</h2>
+      
+        <h3 id="Declaration-宣告"   >
+          <a href="#Declaration-宣告" class="heading-link"><i class="fas fa-link"></i></a><a href="#Declaration-宣告" class="headerlink" title="Declaration 宣告"></a>Declaration 宣告</h3>
+      <p><code>vector&lt;data_type&gt; variable_name;</code></p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; arr_name;</span><br></pre></td></tr></table></div></figure>
+<p>vector 代表你要宣告一個 vector，&lt;&gt;符號裡面放的是你這個陣列要儲存的資料的型態，即每一格要放的資料型態，arr_name 就是為你的 vector 自訂一個名字。</p>
+
+        <h3 id="Initialize-初始化"   >
+          <a href="#Initialize-初始化" class="heading-link"><i class="fas fa-link"></i></a><a href="#Initialize-初始化" class="headerlink" title="Initialize 初始化"></a>Initialize 初始化</h3>
+      <p>你可以看到上面這樣的宣告，好像沒有告訴說這個陣列應該要存多少個資料，因為前面有講，vector 可以自動處理大小，所以可以不用宣告大小，但我會覺得養成宣告大小的習慣會好一些!</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">arr_name</span><span class="params">(<span class="number">10</span>)</span></span>; </span><br><span class="line"><span class="comment">//一維陣列，有十個儲存空間，每個空間都必須存整數，值預設每一個都會存 0</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h3 id="宣告即附值與取大小"   >
+          <a href="#宣告即附值與取大小" class="heading-link"><i class="fas fa-link"></i></a><a href="#宣告即附值與取大小" class="headerlink" title="宣告即附值與取大小"></a>宣告即附值與取大小</h3>
+      <p>上面是只有宣告大小，那如果想要在宣告陣列即給值可以嗎? 當然可以!</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;)</span></span>; </span><br><span class="line"><span class="comment">//宣告一個名為 a 的 vector，其容量為 8</span></span><br><span class="line"><span class="comment">// a[0] = 1, a[1] = 2, a[2] = 3,...依此類推，大家都會</span></span><br></pre></td></tr></table></div></figure>
+
+<p>請注意，這樣寫就不用再宣告長度了，因為他就依據設置的值就可以知道容量多少，請記得 vector 可以動態配置大小。</p>
+<p>今天這樣的一個 vector，可以怎麼取得長度呢?就是使用前面說的 size 成員函式。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>&#125;)</span></span>; </span><br><span class="line">cout &lt;&lt; a.<span class="built_in">size</span>(); <span class="comment">// 當然會印出 8</span></span><br></pre></td></tr></table></div></figure>
+
+<p>在做值的初始化的時候，還有另一種寫法。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">5</span>,<span class="number">100</span>)</span></span>;</span><br><span class="line"><span class="function">vector&lt;string&gt; <span class="title">b</span><span class="params">(<span class="number">10</span>,<span class="string">&quot;orange&quot;</span>)</span></span>;</span><br></pre></td></tr></table></div></figure>
+<p>這個寫法是說，第一個參數代表陣列的 size，第二個參數是這個陣列一被宣告的時候，裡面的每一格初始化為什麼資料。所以 a 有五格，每一格都是 100。</p>
+<p>但請注意，<span style="color:red"><strong>不要自作主張的寫成以下這樣</strong></span>。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">5</span>,<span class="number">100</span>,<span class="number">60</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">13</span>)</span></span>;</span><br></pre></td></tr></table></div></figure>
+<p>不要覺得說第一個數字既然是 size，那我後面是不是可以直接寫每一格的內容是甚麼，<span style="color:red"><strong>沒有這種寫法，請千萬注意</strong></span></p>
+<p><strong>在下方的參考文章內還有複製 vector 的寫法，但不是我覺得重要的點，有興趣歡迎去參考文章看看!</strong></p>
+
+        <h2 id="基本的插入-刪除內容進-vector"   >
+          <a href="#基本的插入-刪除內容進-vector" class="heading-link"><i class="fas fa-link"></i></a><a href="#基本的插入-刪除內容進-vector" class="headerlink" title="基本的插入/刪除內容進 vector"></a>基本的插入/刪除內容進 vector</h2>
+      
+        <h3 id="push-back-amp-pop-back"   >
+          <a href="#push-back-amp-pop-back" class="heading-link"><i class="fas fa-link"></i></a><a href="#push-back-amp-pop-back" class="headerlink" title="push_back &amp; pop_back"></a>push_back &amp; pop_back</h3>
+      <ul>
+<li>push_back()<ul>
+<li>括號內的內容須與你 vector 的儲存資料的型態相同</li>
+<li>push_back() 是把資料放到 vector 的最後面</li>
+</ul>
+</li>
+<li>pop_back()<ul>
+<li>括號內的內容須與你 vector 的儲存資料的型態相同</li>
+<li>pop_back() 是把資料從 vector 的最後面刪掉<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt;a; <span class="comment">// 宣告一個空的陣列，目前大小空間為 0</span></span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">5</span>); <span class="comment">// a 的 size 為 1</span></span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">7</span>); <span class="comment">// a 的 size 為 2</span></span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">3</span>); <span class="comment">// a 的 size 為 3</span></span><br><span class="line">    </span><br><span class="line">    vector&lt;string&gt;b;</span><br><span class="line">    b.<span class="built_in">push_back</span>(<span class="string">&quot;orange&quot;</span>); <span class="comment">// b 的 size 為 1</span></span><br><span class="line">    b.<span class="built_in">push_back</span>(<span class="string">&quot;apple&quot;</span>);  <span class="comment">// b 的 size 為 2</span></span><br><span class="line">    b.<span class="built_in">push_back</span>(<span class="string">&quot;banana&quot;</span>); <span class="comment">// b 的 size 為 3</span></span><br><span class="line">    </span><br><span class="line">    a.<span class="built_in">pop_back</span>(); <span class="comment">// 放在 a 最後面的此時是 3，所以 3 被刪除</span></span><br><span class="line">    a.<span class="built_in">size</span>();     <span class="comment">// 此時 a 的 size 為 2</span></span><br><span class="line">    a.<span class="built_in">pop_back</span>(); <span class="comment">// 放在 a 最後面的此時是 7，所以 7 被刪除</span></span><br><span class="line">    a.<span class="built_in">size</span>();     <span class="comment">// 此時 a 的 size 為 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+但如果你想要初始化陣列的時候就給予大小，你要注意下面這樣的寫法。<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">3</span>); <span class="comment">// 此時 a[4] 也就是第五格，資料為 3</span></span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">5</span>); <span class="comment">// 此時 a[5] 也就是第六格，資料為 5</span></span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">9</span>); <span class="comment">// 此時 a[6] 也就是第七格，資料為 9</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+</ul>
+</li>
+</ul>
+<p>你可能會納悶為甚麼，因為 vector 在宣告即給大小的時候，他就配置的大小為 4 格的陣列出來，每一格都是 0，所以我們此時若 push_back，他會再加一個元素進來，成為第五位成員。</p>
+<p>所以不要傻傻地覺得宣告沒有設值他會乖乖地從 0 開始哦，vector 不是這樣運作的。</p>
+<p><strong>上面的程式碼的話圖會像這樣。</strong></p>
+<p><img src="https://i.imgur.com/nwu4CXl.gif"></p>
+<p>所以如果想要動前四個的內容，就是使用我們學過的中括號摟!</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a[0] = 5;</span><br><span class="line">a[1] = 7;</span><br><span class="line">a[2] = 11;</span><br><span class="line">a[3] = 1;</span><br></pre></td></tr></table></div></figure>
+
+<p>到這邊你可能會覺得，只能夠從最後面增加跟刪除，好像有一點點沒有效率耶。<br>對!所以 vector 還有更進階的能夠直接插入或刪除中間元素的方式，我們後面來談。</p>
+<p>但在談他們之前，我們要先來理解一下 vector iterator 中的 begin() 跟 end()。</p>
+<p>不過 iterator (疊代器) 是比較進階的 vector，所以如果你想挑戰，歡迎去旁邊挑戰一下 Boss -&gt; <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hackmd.io/@ndhu-programming-2021/rJlf9BTTY" >我是旁邊的 Boss</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>比較不行的同學，你可以搞懂下面就好。</p>
+
+        <h2 id="vector-奇妙混淆學習者的特性-capacity"   >
+          <a href="#vector-奇妙混淆學習者的特性-capacity" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-奇妙混淆學習者的特性-capacity" class="headerlink" title="vector 奇妙混淆學習者的特性 - capacity"></a>vector 奇妙混淆學習者的特性 - capacity</h2>
+      
+        <h3 id="vector-中-size-與-capacity-的差異"   >
+          <a href="#vector-中-size-與-capacity-的差異" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-中-size-與-capacity-的差異" class="headerlink" title="vector 中 size 與 capacity 的差異"></a>vector 中 size 與 capacity 的差異</h3>
+      <p>vector 的 capacity 是有必要好好談論的，他和 size 是完全不一樣的東西哦。</p>
+<p>capacity 是取得目前 vector 配置的空間大小，而 size 是取得目前 vector 中有的元素個數。你可以想像成一個能夠裝 10 個東西的箱子(capacity)，他目前裡面有 3 樣東西(size)。</p>
+<p>而如果我們一直朝 vector 內放東西，放到滿了之後，因為 vector 會自動配置大小，所以他會擴充他的容量。而每次的擴充都會是當前 capacity 的 2 倍或 1.5 倍，取決於你的 compiler。<br>而容量會是 1、2、4、8、16、32，以 2 的冪次方成長下去。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vector&lt;<span class="keyword">double</span>&gt; a;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>所以上面的程式輸出如下，希望你能了解 capacity 跟 size 的差異。</p>
+<p><img src="https://i.imgur.com/C5HydOv.png"></p>
+
+        <h2 id="vector-中-reserve-的用法"   >
+          <a href="#vector-中-reserve-的用法" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-中-reserve-的用法" class="headerlink" title="vector 中 reserve() 的用法"></a>vector 中 reserve() 的用法</h2>
+      
+        <h3 id="reserve-預先配置容器"   >
+          <a href="#reserve-預先配置容器" class="heading-link"><i class="fas fa-link"></i></a><a href="#reserve-預先配置容器" class="headerlink" title="reserve 預先配置容器"></a>reserve 預先配置容器</h3>
+      <p>reserve 函式能夠讓你告訴程式 vector 的 capacity 要多大。但裡面沒有放任何東西，所以 size 會是 0。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">    a.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p><img src="https://i.imgur.com/dJTJQTA.png"></p>
+<p>所以直到你 push_back 到他 size 要比 capacity 大的時候，他才會再擴充空間喔。照上面的說明來看，當我今天 size 要變成 11 的時候，capacity 就會變成 20 摟!</p>
+
+        <h3 id="宣告初始化長度與-reserve-的不同"   >
+          <a href="#宣告初始化長度與-reserve-的不同" class="heading-link"><i class="fas fa-link"></i></a><a href="#宣告初始化長度與-reserve-的不同" class="headerlink" title="宣告初始化長度與 reserve 的不同"></a>宣告初始化長度與 reserve 的不同</h3>
+      <p>如果你今天是在宣告的時候就給予 vector 長度，像這樣 <code>vector&lt;int&gt; a(10)</code>。則你的 size 跟 capacity 都會是 10 哦，原因是因為上面這樣的宣告方式，會把全部的格子初始化成 0，所以現在裡面的 10 格都放了 0。</p>
+<p>但上面的 reserve 只有設定容器大小，還沒有在裡面放東西。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="https://i.imgur.com/TecbpkN.png"></p>
+<p>希望大家不要搞混摟!</p>
+
+        <h2 id="vector-shrink-to-fit-容器收縮"   >
+          <a href="#vector-shrink-to-fit-容器收縮" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-shrink-to-fit-容器收縮" class="headerlink" title="vector shrink_to_fit() 容器收縮"></a>vector shrink_to_fit() 容器收縮</h2>
+      <p>今天既然有配置容器大小，那有沒有把多餘用不到的刪除這件事呢? 當然也是有的，就是依靠 shrink_to_fit() 這個成員函式。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; a;</span><br><span class="line">    a.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    a.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">    a.<span class="built_in">shrink_to_fit</span>();</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;, capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="https://i.imgur.com/vsYZHbF.png"></p>
+<p>有沒有發現他相較於陣列真的方便很多，雖然語法可能剛開始學會難一點點，但在一維陣列的處理上真的方便許多，雖然 vector 的二維寫起來比較困難一點就是了。</p>
+
+        <h2 id="vector-的-resize"   >
+          <a href="#vector-的-resize" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-的-resize" class="headerlink" title="vector 的 resize()"></a>vector 的 resize()</h2>
+      <p>那今天有方法把多餘的刪除，那有沒有辦法在放了很多資料後，再把長度根據我們的需求改動呢? 一樣有的，就是依靠 resize() 成員函式。但他與 reserve 不同的是，多被配置出來的新空間，預設會補 0，至於你說 string、double 型態的 vector 預設會補上甚麼，大家可以自己測試。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">a</span><span class="params">(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;)</span></span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="comment">//假設此時我們收到更進階的需求，知道需要 15 格。</span></span><br><span class="line">    a.<span class="built_in">resize</span>(<span class="number">15</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;size:&quot;</span> &lt;&lt; a.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;capacity:&quot;</span> &lt;&lt; a.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><img src="https://i.imgur.com/PEZKklw.png"></p>
+<p>vector 的基礎就先介紹到這邊啦，當然這些不是全部，但我相信也夠你們學了，有興趣的歡迎把 vector 比較進階的應用也學起來哦。</p>
+
+        <h2 id="vector-的優缺點"   >
+          <a href="#vector-的優缺點" class="heading-link"><i class="fas fa-link"></i></a><a href="#vector-的優缺點" class="headerlink" title="vector 的優缺點!"></a>vector 的優缺點!</h2>
+      
+        <h3 id="Advantages"   >
+          <a href="#Advantages" class="heading-link"><i class="fas fa-link"></i></a><a href="#Advantages" class="headerlink" title="Advantages"></a>Advantages</h3>
+      <ul>
+<li>宣告時不用確定大小，由後續的開發配置長度</li>
+<li>節省空間，更提供 shrink_to_fit() 函式供開發者省去空間</li>
+<li>支持 random access，也就是可以依靠 [i] 去取得資料</li>
+<li>插入比較方便<ul>
+<li>若要針對一搬的陣列做插入，要整個搬移。</li>
+</ul>
+</li>
+</ul>
+
+        <h3 id="Disadvantages"   >
+          <a href="#Disadvantages" class="heading-link"><i class="fas fa-link"></i></a><a href="#Disadvantages" class="headerlink" title="Disadvantages"></a>Disadvantages</h3>
+      <ul>
+<li>插入與刪除比較複雜，且效率比較低落<ul>
+<li>你可能要搞懂疊代器(iterator)</li>
+</ul>
+</li>
+<li>只能再末端 push 跟 pop，但正常來說開頭端也可以更好，像 queue 一樣。</li>
+</ul>
+
+        <h2 id="Reference-vector-超棒文章以及推薦"   >
+          <a href="#Reference-vector-超棒文章以及推薦" class="heading-link"><i class="fas fa-link"></i></a><a href="#Reference-vector-超棒文章以及推薦" class="headerlink" title="Reference : vector 超棒文章以及推薦!!"></a>Reference : vector 超棒文章以及推薦!!</h2>
+      <p>請照順序看!!</p>
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://shengyu7697.github.io/std-vector/" >vector 基本介紹</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://ramihaha.tw/c-program-container-vector-array-linklist/" >vector 實作二維陣列</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/vector/vector/" >vector 的 C++ 官方文件</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/vector%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%AF%94-array-%E9%82%84%E6%96%B9%E4%BE%BF%E7%9A%84%E9%99%A3%E5%88%97/">https://410735038.github.io/2022/05/29/vector%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%AF%94-array-%E9%82%84%E6%96%B9%E4%BE%BF%E7%9A%84%E9%99%A3%E5%88%97/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/%E9%80%B2%E9%9A%8E-vector%EF%BC%8C%E7%96%8A%E4%BB%A3%E5%99%A8%E8%88%87-insert-erase/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">進階 vector，疊代器與 insert / erase</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/%E5%AD%97%E4%B8%B2String/"><span class="paginator-prev__text">字串String</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vector%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%AF%94-array-%E9%82%84%E6%96%B9%E4%BE%BF%E7%9A%84%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          vector，另一種比 array 還方便的陣列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-library-%E5%BC%95%E5%85%A5"><span class="toc-number"></span> <span class="toc-text">
+          vector library 引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%91%98%E8%A6%81"><span class="toc-number"></span> <span class="toc-text">
+          vector 常用功能摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E5%AE%A3%E5%91%8A%E8%88%87%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number"></span> <span class="toc-text">
+          vector 宣告與初始化!</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Declaration-%E5%AE%A3%E5%91%8A"><span class="toc-number"></span> <span class="toc-text">
+          Declaration 宣告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Initialize-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number"></span> <span class="toc-text">
+          Initialize 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A3%E5%91%8A%E5%8D%B3%E9%99%84%E5%80%BC%E8%88%87%E5%8F%96%E5%A4%A7%E5%B0%8F"><span class="toc-number"></span> <span class="toc-text">
+          宣告即附值與取大小</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8F%92%E5%85%A5-%E5%88%AA%E9%99%A4%E5%85%A7%E5%AE%B9%E9%80%B2-vector"><span class="toc-number"></span> <span class="toc-text">
+          基本的插入&#x2F;刪除內容進 vector</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#push-back-amp-pop-back"><span class="toc-number"></span> <span class="toc-text">
+          push_back &amp; pop_back</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E5%A5%87%E5%A6%99%E6%B7%B7%E6%B7%86%E5%AD%B8%E7%BF%92%E8%80%85%E7%9A%84%E7%89%B9%E6%80%A7-capacity"><span class="toc-number"></span> <span class="toc-text">
+          vector 奇妙混淆學習者的特性 - capacity</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vector-%E4%B8%AD-size-%E8%88%87-capacity-%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="toc-number"></span> <span class="toc-text">
+          vector 中 size 與 capacity 的差異</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E4%B8%AD-reserve-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">
+          vector 中 reserve() 的用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reserve-%E9%A0%90%E5%85%88%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">
+          reserve 預先配置容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A3%E5%91%8A%E5%88%9D%E5%A7%8B%E5%8C%96%E9%95%B7%E5%BA%A6%E8%88%87-reserve-%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="toc-number"></span> <span class="toc-text">
+          宣告初始化長度與 reserve 的不同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-shrink-to-fit-%E5%AE%B9%E5%99%A8%E6%94%B6%E7%B8%AE"><span class="toc-number"></span> <span class="toc-text">
+          vector shrink_to_fit() 容器收縮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E7%9A%84-resize"><span class="toc-number"></span> <span class="toc-text">
+          vector 的 resize()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector-%E7%9A%84%E5%84%AA%E7%BC%BA%E9%BB%9E"><span class="toc-number"></span> <span class="toc-text">
+          vector 的優缺點!</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages"><span class="toc-number"></span> <span class="toc-text">
+          Advantages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disadvantages"><span class="toc-number"></span> <span class="toc-text">
+          Disadvantages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference-vector-%E8%B6%85%E6%A3%92%E6%96%87%E7%AB%A0%E4%BB%A5%E5%8F%8A%E6%8E%A8%E8%96%A6"><span class="toc-number"></span> <span class="toc-text">
+          Reference : vector 超棒文章以及推薦!!</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">文章列表</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
