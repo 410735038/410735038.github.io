@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           巢狀迴圈、陣列淺談                           前言       前面介紹過do-while&#x2F;while&#x2F;for-loop，這邊就簡單的介紹巢狀迴圈可能用在什麼地方，以及跟陣列有什麼關係。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="巢狀迴圈、陣列淺談">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E3%80%81%E9%99%A3%E5%88%97%E6%B7%BA%E8%AB%87/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           巢狀迴圈、陣列淺談                           前言       前面介紹過do-while&#x2F;while&#x2F;for-loop，這邊就簡單的介紹巢狀迴圈可能用在什麼地方，以及跟陣列有什麼關係。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-05-29T09:12:19.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:28:48.869Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary"><title>巢狀迴圈、陣列淺談 | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E3%80%81%E9%99%A3%E5%88%97%E6%B7%BA%E8%AB%87/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首頁</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">歸檔</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">巢狀迴圈、陣列淺談</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="巢狀迴圈、陣列淺談"   >
+          <a href="#巢狀迴圈、陣列淺談" class="heading-link"><i class="fas fa-link"></i></a><a href="#巢狀迴圈、陣列淺談" class="headerlink" title="巢狀迴圈、陣列淺談"></a>巢狀迴圈、陣列淺談</h1>
+      
+        <h1 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+      <p>前面介紹過do-while/while/for-loop，這邊就簡單的介紹巢狀迴圈可能用在什麼地方，以及跟陣列有什麼關係。</p>
+<span id="more"></span>
+
+
+
+        <h1 id="巢狀迴圈"   >
+          <a href="#巢狀迴圈" class="heading-link"><i class="fas fa-link"></i></a><a href="#巢狀迴圈" class="headerlink" title="巢狀迴圈"></a>巢狀迴圈</h1>
+      <p>最好理解的方式就是:迴圈裡面又包了一個迴圈 :point_down: </p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span>(初值; 條件; 步進)&#123;</span><br><span class="line">    <span class="keyword">for</span>(初值; 條件; 步進)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+<p>那巢狀迴圈究竟可以做什麼?我又該怎麼用眼睛來看巢狀迴圈的運作呢?<br>先讓我向各位預告，各位接下來在使用巢狀迴圈時可能犯的錯誤，緊接著談什麼樣的例子可以使用巢狀迴圈來解決。</p>
+
+        <h3 id="常犯錯誤"   >
+          <a href="#常犯錯誤" class="heading-link"><i class="fas fa-link"></i></a><a href="#常犯錯誤" class="headerlink" title="常犯錯誤"></a>常犯錯誤</h3>
+      <p><span style="color:red;"><strong>非常重要!!!</strong> </span></p>
+<p>除非你有其他需求，否則… 就新手而言</p>
+<p>在寫巢狀迴圈的時候，<span style="color:red;"><strong>切記初值的變數要設不一樣</strong></span>，否則你想做的和你實際做出來的會差非常的多:open_mouth:</p>
+<p>兩者的差異示範 :point_down:<br>第一個程式碼初值變數設<strong>不一樣</strong>。<br>第二個程式碼的初值變數設<strong>一樣</strong>。</p>
+<ol>
+<li>變數設不相同 :heavy_check_mark:</li>
+</ol>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;    <span class="comment">//外層迴圈</span></span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;進到for1&quot;</span>&lt;&lt;endl;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++)&#123;    <span class="comment">//內層迴圈</span></span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;進到for2&quot;</span>&lt;&lt;endl; </span><br><span class="line">	&#125;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p><strong>輸出:</strong><br>可以看到這種做法內層的迴圈會執行9次。<br>當外層的迴圈，i=0時，馬上進到內層迴圈j=0，內層迴圈不斷執行且j++，直到j&lt;3不成立後會跳出內層迴圈，此時，我們又重新回到外層迴圈，i++，i=1，繼續執行(再次進到內層迴圈)直到i&lt;3不成立。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">進到for1</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line"></span><br><span class="line">進到for1</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line"></span><br><span class="line">進到for1</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+<ol start="2">
+<li>變數相同 (有其他需求例外:wink:)</li>
+</ol>
+<p>在這個情況裡，注意到第四行的內層for迴圈，初值的變數與外層的初值變數是相同的(皆是i)，所以在執行的過程中，內層迴圈改動i值同樣會影響到外層迴圈。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;進到for1&quot;</span>&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;進到for2&quot;</span>&lt;&lt;endl; </span><br><span class="line">	&#125;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p><strong>輸出:</strong> </p>
+<p>從輸出來看，應該能明顯的看出兩種情況的差異。我們的外層迴圈只有電腦剛到外層時才執行一次，因為內層迴圈將i的值改為3，所以不論是在內層還是外層都因為條件i&lt;3不成立而跳出迴圈。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">進到for1</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line">進到for2</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="巢狀迴圈實例"   >
+          <a href="#巢狀迴圈實例" class="heading-link"><i class="fas fa-link"></i></a><a href="#巢狀迴圈實例" class="headerlink" title="巢狀迴圈實例"></a>巢狀迴圈實例</h3>
+      <p>實例有很多很多。所以我就先介紹幾個就好</p>
+
+        <h4 id="九九乘法表"   >
+          <a href="#九九乘法表" class="heading-link"><i class="fas fa-link"></i></a><a href="#九九乘法表" class="headerlink" title="九九乘法表"></a>九九乘法表</h4>
+      <blockquote>
+<p>我需要介紹嗎?:anger:<br> 2 X 11 = 23   </p>
+</blockquote>
+<p>此處使用巢狀迴圈，外層for用來記錄現在是1~9哪個表，內層迴圈的功能是讓當下表裡面的 「? x 1」 ~「? x 9」都跑完。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">9</span>;i++)&#123;    <span class="comment">//外層</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">9</span>;j++)&#123;    <span class="comment">//內層</span></span><br><span class="line">	    cout&lt;&lt;i&lt;&lt;<span class="string">&quot; X &quot;</span>&lt;&lt;j&lt;&lt;<span class="string">&quot; = &quot;</span>&lt;&lt;i*j&lt;&lt;<span class="string">&quot;\t&quot;</span>; </span><br><span class="line">	    <span class="comment">// \t 為跳一個tab的距離</span></span><br><span class="line">    &#125;    </span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;\n&quot;</span>;    <span class="comment">//\n為換行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>輸出:</strong><br>從輸出來看<br>外層掌控 :point_down: 方向<br>內層掌控 :point_right: 方向</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1 X 1 = 1       1 X 2 = 2       1 X 3 = 3       1 X 4 = 4       1 X 5 = 5       1 X 6 = 6       1 X 7 = 7       1 X 8 = 8       1 X 9 = 9</span><br><span class="line">2 X 1 = 2       2 X 2 = 4       2 X 3 = 6       2 X 4 = 8       2 X 5 = 10      2 X 6 = 12      2 X 7 = 14      2 X 8 = 16      2 X 9 = 18</span><br><span class="line">3 X 1 = 3       3 X 2 = 6       3 X 3 = 9       3 X 4 = 12      3 X 5 = 15      3 X 6 = 18      3 X 7 = 21      3 X 8 = 24      3 X 9 = 27</span><br><span class="line">4 X 1 = 4       4 X 2 = 8       4 X 3 = 12      4 X 4 = 16      4 X 5 = 20      4 X 6 = 24      4 X 7 = 28      4 X 8 = 32      4 X 9 = 36</span><br><span class="line">5 X 1 = 5       5 X 2 = 10      5 X 3 = 15      5 X 4 = 20      5 X 5 = 25      5 X 6 = 30      5 X 7 = 35      5 X 8 = 40      5 X 9 = 45</span><br><span class="line">6 X 1 = 6       6 X 2 = 12      6 X 3 = 18      6 X 4 = 24      6 X 5 = 30      6 X 6 = 36      6 X 7 = 42      6 X 8 = 48      6 X 9 = 54</span><br><span class="line">7 X 1 = 7       7 X 2 = 14      7 X 3 = 21      7 X 4 = 28      7 X 5 = 35      7 X 6 = 42      7 X 7 = 49      7 X 8 = 56      7 X 9 = 63</span><br><span class="line">8 X 1 = 8       8 X 2 = 16      8 X 3 = 24      8 X 4 = 32      8 X 5 = 40      8 X 6 = 48      8 X 7 = 56      8 X 8 = 64      8 X 9 = 72</span><br><span class="line">9 X 1 = 9       9 X 2 = 18      9 X 3 = 27      9 X 4 = 36      9 X 5 = 45      9 X 6 = 54      9 X 7 = 63      9 X 8 = 72      9 X 9 = 81</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="三角形、金字塔題目"   >
+          <a href="#三角形、金字塔題目" class="heading-link"><i class="fas fa-link"></i></a><a href="#三角形、金字塔題目" class="headerlink" title="三角形、金字塔題目"></a>三角形、金字塔題目</h4>
+      <p>巢狀迴圈最常見的例子還有三角形跟金字塔，網路上也是一堆資料可以拿來參考使用。待會我將介紹一個相當簡單的經典題目。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">5</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=i;j=j+<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;*&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>因為沒有空格的問題要解決，所以這個題目就更簡單了!我們觀察輸出得知，第一層需要一個 :star:，第二層需要兩個:star:……以此類推。</p>
+<p>根據上面的的解答參考，我把兩個for分別做什麼事情抓出來</p>
+<p>第一個for</p>
+<blockquote>
+<p>i=1; i&lt;=5<br>總共有五層需要輸出<br>i配合內層迴圈所以一開始值就給1</p>
+</blockquote>
+<p>第二個for</p>
+<blockquote>
+<p>j=1; j&lt;=i<br>j&lt;=i 用來寫第幾層就要輸出幾次:star:<br>以第二層為例，應該要輸出兩個:star:<br>當電腦進到內層迴圈時，此時的i=2; j的初值仍是1，因此j&lt;=i會執行兩次　</p>
+</blockquote>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*</span><br><span class="line">**</span><br><span class="line">***</span><br><span class="line">****</span><br><span class="line">*****</span><br></pre></td></tr></table></div></figure>
+
+<p>不需要輸出空白的三角形是不是很好寫呢? 相信你會說「真的很好寫!」<br>然而凡事都是一步一步向前邁進，既然我們寫完三角形了，現在來試試看金字塔吧! </p>
+
+        <h4 id="輸入二維以上陣列的值"   >
+          <a href="#輸入二維以上陣列的值" class="heading-link"><i class="fas fa-link"></i></a><a href="#輸入二維以上陣列的值" class="headerlink" title="輸入二維以上陣列的值"></a>輸入二維以上陣列的值</h4>
+      <p>輸入一維陣列的時候，我們只需要一個for迴圈就可以解決。但當出現二維或二維以上的陣列時，只要有關輸入值的部分，我們就一定要用到巢狀迴圈!其實不僅輸入值的部分，像是將陣列所有值都輸出、取值，也是會用到巢狀迴圈。</p>
+<blockquote>
+<p>只要想到二維以上的陣列，就要想起它們共同的老公。<br>「巢狀迴圈」 [name=朱眼影]</p>
+</blockquote>
+
+        <h1 id="淺談陣列"   >
+          <a href="#淺談陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#淺談陣列" class="headerlink" title="淺談陣列"></a>淺談陣列</h1>
+      <p><strong>陣列的特性</strong></p>
+<ul>
+<li>相同data type</li>
+<li>連續空間</li>
+<li>陣列的第一個索引值是0，不是1</li>
+</ul>
+
+        <h3 id="為什麼我們需要陣列"   >
+          <a href="#為什麼我們需要陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#為什麼我們需要陣列" class="headerlink" title="為什麼我們需要陣列?"></a>為什麼我們需要陣列?</h3>
+      <p>試想一下，今天有一個任務是讓你寫一個可以用來輸入某班級的某科成績，而這個班上只有3個人。相信大家的反應都非常的直覺且肯定，沒錯!我們就宣告三個變數這個題目就差不多結束了!</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> peo1,peo2,peo3;  </span><br><span class="line">cin&gt;&gt;peo1&gt;&gt;peo2&gt;&gt;peo3;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>然而…</strong><br>如果今天這個班級有100個人呢? 你會想要宣告100個變數來解決這個題目嗎?如果你夠有氣魄，還真的宣告了100個變數，那我會更加深這個題目。<br>請你輸入這100個人的國、英、數、自、社五科的分數，你該怎麼做?</p>
+<p>這時候我們的陣列就可以派上用場了!</p>
+<ul>
+<li>當我們需要輸入100人單一科的成績時;</li>
+</ul>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> score[<span class="number">100</span>];</span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li>當我們需要輸入100人五科的成績時;</li>
+</ul>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> score[<span class="number">100</span>][<span class="number">5</span>];    <span class="comment">//可視為100個長度為5的int陣列</span></span><br></pre></td></tr></table></div></figure>
+
+<p><strong>簡單的一行程式碼便可以取代一次宣告多個變數的命運</strong><br>當然，<span style="color:red;"><strong>同一個陣列的資料型態必須是相同的</strong>! </span>不能有人是字串，有些人是整數，還有些人是布林值。</p>
+
+        <h3 id="如何宣告陣列"   >
+          <a href="#如何宣告陣列" class="heading-link"><i class="fas fa-link"></i></a><a href="#如何宣告陣列" class="headerlink" title="如何宣告陣列"></a>如何宣告陣列</h3>
+      <ol>
+<li>當你要宣告陣列時，首先要先告訴電腦這個陣列是什麼data type，這個做法就跟你宣告變數是一樣的。</li>
+<li>幫你的陣列取上一個響亮的大名</li>
+<li>給陣列長度</li>
+</ol>
+<p><strong>綜合以上三點，可得到語法</strong></p>
+<blockquote>
+<p><span style="color:red;">data type</span> array_name[<span style="color:green;">長度</span>]</p>
+</blockquote>
+<p>舉例來說 :point_down: </p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String name[<span class="number">5</span>];  <span class="comment">//宣告一個名子為name長度為5的字串陣列</span></span><br></pre></td></tr></table></div></figure>
+
+
+        <h4 id="賦予陣列值"   >
+          <a href="#賦予陣列值" class="heading-link"><i class="fas fa-link"></i></a><a href="#賦予陣列值" class="headerlink" title="賦予陣列值"></a>賦予陣列值</h4>
+      <p>有兩種賦予值的方法，第一種是先宣告完陣列後再賦值，第二種是宣告時就給陣列值。</p>
+<p><strong>1. 先宣告陣列，後面再輸入值</strong></p>
+<p>如果要賦予陣列值可以使用for迴圈</p>
+<ul>
+<li><p>輸入一維陣列的值<br>name[5]</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    cin&gt;&gt;name[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
+<li><ol start="2">
+<li>輸入二維陣列的值(使用巢狀迴圈)<br>score[100][5]</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">5</span>;j++)&#123;</span><br><span class="line">        cin&gt;&gt;score[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p><strong>2. 宣告的同時賦予值</strong></p>
+<ul>
+<li>完整給值(給初始值)<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> score[<span class="number">5</span>]=&#123;<span class="number">100</span>,<span class="number">50</span>,<span class="number">99</span>,<span class="number">48</span>,<span class="number">78</span>&#125;;</span><br></pre></td></tr></table></div></figure>
+此時</li>
+</ul>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">score[0]為100</span><br><span class="line">score[1]為50</span><br><span class="line">score[2]為99</span><br><span class="line">score[3]為48</span><br><span class="line">score[4]為78</span><br></pre></td></tr></table></div></figure>
+<ul>
+<li>不完整給值</li>
+</ul>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> score[<span class="number">5</span>]=&#123;<span class="number">100</span>,<span class="number">50</span>&#125;;</span><br></pre></td></tr></table></div></figure>
+<p>此時</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">score[0]為100</span><br><span class="line">score[1]為50</span><br><span class="line">score[2]~score[4]為0</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="如何取得陣列值"   >
+          <a href="#如何取得陣列值" class="heading-link"><i class="fas fa-link"></i></a><a href="#如何取得陣列值" class="headerlink" title="如何取得陣列值"></a>如何取得陣列值</h3>
+      <p><span style="color:red;"><strong>重要!!</strong></span>  <strong>陣列的第一個索引值是0不是1</strong><br>也就是說，當你要取得陣列的第一個值時，你必須將索引值打0才行，以下面這個已賦值的陣列為例。</p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> score[<span class="number">5</span>]=&#123;<span class="number">100</span>,<span class="number">50</span>,<span class="number">99</span>,<span class="number">48</span>,<span class="number">78</span>&#125;;</span><br></pre></td></tr></table></div></figure>
+<p>如果我們要取第一個人的成績，則要打score[0]<br>以此可推知，若要取第二個人的成績，則為score[1]</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E3%80%81%E9%99%A3%E5%88%97%E6%B7%BA%E8%AB%87/">https://410735038.github.io/2022/05/29/%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E3%80%81%E9%99%A3%E5%88%97%E6%B7%BA%E8%AB%87/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/%E8%AE%8A%E6%95%B8%E7%9A%84%E5%AD%98%E6%B4%BB%E7%AF%84%E5%9C%8D%EF%BC%8C%E5%A6%82%E4%BD%95%E7%9C%8B-block%EF%BC%8C%E4%B8%8D%E5%86%8D%E6%90%9E%E6%B7%B7%E8%AE%8A%E6%95%B8%E7%AF%84%E5%9C%8D%EF%BC%8C%E5%8D%80%E5%9F%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">變數的存活範圍，如何看 block，不再搞混變數範圍，區域變數與全域變數</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/%E6%96%B0%E6%89%8B%E7%9A%84%E6%AE%BA%E6%89%8B%E7%8E%8B%E7%89%8C%E8%88%87%E5%8A%A9%E6%95%99%E7%9A%84%E6%89%A3%E5%88%86%E9%87%8D%E9%BB%9E-%E5%87%BD%E5%BC%8Ffunction-%E4%BA%8C-call-by-value%E3%80%81call-by-reference-%E4%BB%A5%E5%8F%8A-Overloading-function/"><span class="paginator-prev__text">新手的殺手王牌與助教的扣分重點 - 函式function (二) call-by-value、call-by-reference 以及 Overloading function</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E3%80%81%E9%99%A3%E5%88%97%E6%B7%BA%E8%AB%87"><span class="toc-number"></span> <span class="toc-text">
+          巢狀迴圈、陣列淺談</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88"><span class="toc-number"></span> <span class="toc-text">
+          巢狀迴圈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%8A%AF%E9%8C%AF%E8%AA%A4"><span class="toc-number"></span> <span class="toc-text">
+          常犯錯誤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A2%E7%8B%80%E8%BF%B4%E5%9C%88%E5%AF%A6%E4%BE%8B"><span class="toc-number"></span> <span class="toc-text">
+          巢狀迴圈實例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8"><span class="toc-number"></span> <span class="toc-text">
+          九九乘法表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E3%80%81%E9%87%91%E5%AD%97%E5%A1%94%E9%A1%8C%E7%9B%AE"><span class="toc-number"></span> <span class="toc-text">
+          三角形、金字塔題目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BC%B8%E5%85%A5%E4%BA%8C%E7%B6%AD%E4%BB%A5%E4%B8%8A%E9%99%A3%E5%88%97%E7%9A%84%E5%80%BC"><span class="toc-number"></span> <span class="toc-text">
+          輸入二維以上陣列的值</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%BA%E8%AB%87%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          淺談陣列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E5%80%91%E9%9C%80%E8%A6%81%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          為什麼我們需要陣列?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%A3%E5%91%8A%E9%99%A3%E5%88%97"><span class="toc-number"></span> <span class="toc-text">
+          如何宣告陣列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B3%A6%E4%BA%88%E9%99%A3%E5%88%97%E5%80%BC"><span class="toc-number"></span> <span class="toc-text">
+          賦予陣列值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8F%96%E5%BE%97%E9%99%A3%E5%88%97%E5%80%BC"><span class="toc-number"></span> <span class="toc-text">
+          如何取得陣列值</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">歸檔</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

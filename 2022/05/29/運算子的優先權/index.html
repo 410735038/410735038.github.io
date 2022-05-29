@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           運算子的優先權                           前言       在任何的程式語言裡面，都有運算子，如 + - * &#x2F;，我們在學數學的時候都知道，先乘除後加減，看到括號要先算，這個不變的道理。在程式語言裡面也是一樣的，但程式語">
+<meta property="og:type" content="article">
+<meta property="og:title" content="運算子的優先權">
+<meta property="og:url" content="https://410735038.github.io/2022/05/29/%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享                           運算子的優先權                           前言       在任何的程式語言裡面，都有運算子，如 + - * &#x2F;，我們在學數學的時候都知道，先乘除後加減，看到括號要先算，這個不變的道理。在程式語言裡面也是一樣的，但程式語">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-05-29T09:37:18.000Z">
+<meta property="article:modified_time" content="2022-05-29T09:37:30.707Z">
+<meta property="article:author" content="Orange">
+<meta name="twitter:card" content="summary"><title>運算子的優先權 | Orange</title><link ref="canonical" href="https://410735038.github.io/2022/05/29/%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"複製","copySuccess":"複製成功","copyError":"複製失敗"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首頁</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">歸檔</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分類</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">標籤</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Orange</div><div class="header-banner-info__subtitle">be kind, be humble</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">運算子的優先權</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">發表於</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新於</span><span class="post-meta-item__value">2022-05-29</span></span></div></header><div class="post-body">
+        <h6 id="tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享"   >
+          <a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="heading-link"><i class="fas fa-link"></i></a><a href="#tags-大一程設-下-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設-下</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6>
+      
+        <h1 id="運算子的優先權"   >
+          <a href="#運算子的優先權" class="heading-link"><i class="fas fa-link"></i></a><a href="#運算子的優先權" class="headerlink" title="運算子的優先權"></a>運算子的優先權</h1>
+      
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h2>
+      <p>在任何的程式語言裡面，都有運算子，如 <code>+ - * /</code>，我們在學數學的時候都知道，先乘除後加減，看到括號要先算，這個不變的道理。在程式語言裡面也是一樣的，但程式語言內運算子又更多更複雜了，所以當然要向基本運算一樣，幫每個運算子作<span style="color:red"><strong>優先順序跟結合性</strong></span>的訂定。</p>
+<span id="more"></span>
+
+
+        <h2 id="運算子優先權的重要核心"   >
+          <a href="#運算子優先權的重要核心" class="heading-link"><i class="fas fa-link"></i></a><a href="#運算子優先權的重要核心" class="headerlink" title="運算子優先權的重要核心"></a>運算子優先權的重要核心</h2>
+      <p><span style="color:red;font-size:25px"><strong>全部的運算子在看優先順序時，統一先看優先權高低，再看結合性。</strong></span></p>
+
+        <h2 id="名詞釐清-運算元與運算子"   >
+          <a href="#名詞釐清-運算元與運算子" class="heading-link"><i class="fas fa-link"></i></a><a href="#名詞釐清-運算元與運算子" class="headerlink" title="名詞釐清 - 運算元與運算子"></a>名詞釐清 - 運算元與運算子</h2>
+      <p>100 + 20 = 120</p>
+<p>a + b</p>
+<ul>
+<li>100、20、120 這樣的數字稱為運算元(operand)</li>
+<li>+、= 這樣的符號稱為運算子(operator)</li>
+<li>a、b 這樣的變數也稱為運算元(operand)</li>
+</ul>
+<p>請不要搞混，要背熟哦~</p>
+
+        <h2 id="名詞釐清-一元運算子、二元運算子"   >
+          <a href="#名詞釐清-一元運算子、二元運算子" class="heading-link"><i class="fas fa-link"></i></a><a href="#名詞釐清-一元運算子、二元運算子" class="headerlink" title="名詞釐清 - 一元運算子、二元運算子"></a>名詞釐清 - 一元運算子、二元運算子</h2>
+      <p>元代表運算元的意思，一或二就代表這個運算子一次要搭配幾個運算元。</p>
+<p>以 <code>!</code> 為例，他就是一元運算子，表示 <code>NOT</code>，所以我們再打 code 的時候通常會打 <code>if(!bool_variable)</code>，這個 bool_variable 是一個布林變數(變數是一個運算元)，所以<code>!</code>搭配一個運算元。</p>
+<p>以四則運算的 <code>+</code> 為例，他是二元運算子，所以我們通常會打 <code>a+b</code>，你發現它搭配了兩個運算元 <code>a</code> 跟 <code>b</code>。</p>
+<p>以正負號的 <code>+</code> 或 <code>-</code> 為例，他是一元運算子，正號我們通常會省略，負號我們通常會打 <code>-10</code>、<code>-a</code>，要搭配一個運算元。</p>
+
+        <h2 id="名詞釐清-結合性"   >
+          <a href="#名詞釐清-結合性" class="heading-link"><i class="fas fa-link"></i></a><a href="#名詞釐清-結合性" class="headerlink" title="名詞釐清 - 結合性"></a>名詞釐清 - 結合性</h2>
+      <p>接下來很重要的名詞就是結合性，每個運算子都會有結合性。而結合性有左結合與右結合兩種。</p>
+<p>左與右的差別是在做運算的時候從哪邊過去為優先。</p>
+
+        <h3 id="左結合"   >
+          <a href="#左結合" class="heading-link"><i class="fas fa-link"></i></a><a href="#左結合" class="headerlink" title="左結合"></a>左結合</h3>
+      <p>基本的四則運算運算子都是左結合。</p>
+<p><code>3 + 5 + 8 + 10</code>，因為 <code>+</code> 是左結合，所以從左邊優先，他其實是這樣。<br><code>(((3 + 5) + 8) + 10)</code></p>
+<p>記得看到括號要先算!所以你會發現他是左邊優先一直往右</p>
+<p>關係運算子也都是左結合。如 <code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code><br><code>a &gt; b &gt; c &gt; d</code>，因為是左結合所以會變成 <code>(((a &gt; b) &gt; c) &gt; d)</code>。</p>
+<p>其他的像 <code>==</code>、<code>！=</code>、<code>||</code>、<code>&amp;&amp;</code> 也都是左結合。</p>
+<p>當然還有更多的左結合，可以看下面的參考連結。</p>
+
+        <h3 id="右結合"   >
+          <a href="#右結合" class="heading-link"><i class="fas fa-link"></i></a><a href="#右結合" class="headerlink" title="右結合"></a>右結合</h3>
+      <p>右結合只有三類，分別是<span style="color:red">一元運算子、三元運算子、指派運算子</span></p>
+<p>指派運算子像是 <code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code> 等等的這些。</p>
+<p><span style="color:red"><strong>請注意，實際上不會這樣寫下面這樣，我只是幫你了解右結合</strong></span></p>
+<figure class="highlight cpp"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">4</span>, c = <span class="number">10</span>;</span><br><span class="line">a+=b+=c;</span><br><span class="line">cout &lt;&lt; a;</span><br></pre></td></tr></table></div></figure>
+
+<p>因為我們知道指派運算子是右結合，所以會像這樣。<br><code>(a += (b += c))</code>，內層括號會優先算，且右結合，所以會從右邊往左推。</p>
+<p>但在實務上程式碼不會這樣寫，太弔詭了。</p>
+<p><code>a += b += c</code> 他的運作是:<br><code>a = a + (b += c)</code><br>又可以再拆成<br><code>a = a + (b = b + c)</code><br>你會發現不就是 <code>a = a + b + c</code> 嗎…</p>
+<p>希望你有充分了解左結合與右結合摟，之所以認真談論這個，是因為<span style="color:red">指標運算很重視優先權跟結合性</span>，所以希望你搞懂!</p>
+
+        <h2 id="優先權排序"   >
+          <a href="#優先權排序" class="heading-link"><i class="fas fa-link"></i></a><a href="#優先權排序" class="headerlink" title="優先權排序"></a>優先權排序</h2>
+      <p><span style="color:red;font-size:25px"><strong>全部的運算子在看優先順序時，統一先看優先權高低，再看結合性。</strong></span></p>
+<p>這邊網路上已經有許多大神都已經整理好了，參考連結直接給大家!</p>
+<p>可能不是每個運算子大家都了解，趁這個機會知道他們在幹嘛吧，可以多利用 google 哦!<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://magicjackting.pixnet.net/blog/post/70902861" >參考連結 - 1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://programingman.blogspot.com/2015/01/cc.html" >參考連結 - 2</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>請記得回去看指標的這篇喔，了解指標的運算! -&gt; <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hackmd.io/@ndhu-programming-2021/B1NUHICaF#%E8%A3%9C%E5%85%85%EF%BC%8C%E9%81%B8%E6%93%87%E6%80%A7%E9%96%B1%E8%AE%80%E6%8C%87%E6%A8%99%E7%9A%84%E9%81%8B%E7%AE%97-pointer-arithmetic" >pointer 實作一般陣列，以及 1-d dynamic array</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文結束，感謝您的閱讀 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://410735038.github.io">Orange</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文連結: </span><span class="copyright-link__value"><a href="https://410735038.github.io/2022/05/29/%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A/">https://410735038.github.io/2022/05/29/%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版權聲明: </span><span class="copyright-notice__value">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" rel="external nofollow" target="_blank">BY-NC-SA</a> 許可協議。轉載請注明出處！</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2022/05/29/Untitled/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">進階探討 pointer 雙重指標!與 2-d dynamic array</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2022/05/29/pointer-%E5%AF%A6%E4%BD%9C%E4%B8%80%E8%88%AC%E9%99%A3%E5%88%97%EF%BC%8C%E4%BB%A5%E5%8F%8A-1-d-dynamic-array/"><span class="paginator-prev__text">pointer 實作一般陣列，以及 1-d dynamic array</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目錄</span><span class="sidebar-nav-ov">本站概覽</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#tags-%E5%A4%A7%E4%B8%80%E7%A8%8B%E8%A8%AD-%E4%B8%8B-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8-%E6%9D%B1%E8%8F%AF%E5%A4%A7%E5%AD%B8%E8%B3%87%E7%AE%A1%E7%B3%BB-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BC%8F%E6%A6%82%E5%BF%B5-%E8%B3%87%E7%AE%A1%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">
+          tags: 大一程設-下 東華大學 東華大學資管系 基本程式概念 資管經驗分享</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%8B%E7%AE%97%E5%AD%90%E7%9A%84%E5%84%AA%E5%85%88%E6%AC%8A"><span class="toc-number"></span> <span class="toc-text">
+          運算子的優先權</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number"></span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%8B%E7%AE%97%E5%AD%90%E5%84%AA%E5%85%88%E6%AC%8A%E7%9A%84%E9%87%8D%E8%A6%81%E6%A0%B8%E5%BF%83"><span class="toc-number"></span> <span class="toc-text">
+          運算子優先權的重要核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%A9%9E%E9%87%90%E6%B8%85-%E9%81%8B%E7%AE%97%E5%85%83%E8%88%87%E9%81%8B%E7%AE%97%E5%AD%90"><span class="toc-number"></span> <span class="toc-text">
+          名詞釐清 - 運算元與運算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%A9%9E%E9%87%90%E6%B8%85-%E4%B8%80%E5%85%83%E9%81%8B%E7%AE%97%E5%AD%90%E3%80%81%E4%BA%8C%E5%85%83%E9%81%8B%E7%AE%97%E5%AD%90"><span class="toc-number"></span> <span class="toc-text">
+          名詞釐清 - 一元運算子、二元運算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%A9%9E%E9%87%90%E6%B8%85-%E7%B5%90%E5%90%88%E6%80%A7"><span class="toc-number"></span> <span class="toc-text">
+          名詞釐清 - 結合性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A6%E7%B5%90%E5%90%88"><span class="toc-number"></span> <span class="toc-text">
+          左結合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%B3%E7%B5%90%E5%90%88"><span class="toc-number"></span> <span class="toc-text">
+          右結合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%84%AA%E5%85%88%E6%AC%8A%E6%8E%92%E5%BA%8F"><span class="toc-number"></span> <span class="toc-text">
+          優先權排序</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">be kind, be humble</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">歸檔</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分類</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">標籤</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" rel="noopener" data-popover="知識共享許可協議" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已閱讀了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Orange</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 強力驅動</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主題 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
