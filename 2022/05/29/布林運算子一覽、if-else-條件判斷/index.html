@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    布林運算子一覽、if-else 條件判斷 | Orange
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  
+  ">
+  
+  <meta name="author" content="neOrangene">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/">Archives</a></li>
+        
+        
+        <li><a href="/">Categories</a></li>
+        
+        
+        <li><a href="/">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/"
+           class="header-toolbar-right"> 6 </a>
+      </li>
+      <li>
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+      <li>
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Orange</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    neOrangene
+
+    <span class="post-date float-right" title="{{moment(1653799478000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1653799478000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>布林運算子一覽、if-else 條件判斷</h1>
+    <h6 id="tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享"><a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6><h1 id="布林運算子一覽、if-else-條件判斷"><a href="#布林運算子一覽、if-else-條件判斷" class="headerlink" title="布林運算子一覽、if-else 條件判斷"></a>布林運算子一覽、if-else 條件判斷</h1><p>[TOC] </p>
+<h1 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h1><h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(條件)&#123;</span><br><span class="line">    該條件成立後，會做什麼</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    該條件不成立，會做什麼</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>補充:</strong><br>你可以單獨寫一個if判斷式就好，else不需要寫。<br><span style="color:red;"><strong>然而，當你寫了else則一定要幫他搭配一個if，簡單來說就是else不能單獨出現。</span></strong></p>
+<p>好了，想必看完上面大家都能明白程式怎麼寫了吧!我深信你們聰慧，但以防萬一，我還是要跟大家提一些if-else的運作機制。</p>
+<hr>
+<h2 id="if-else裡的條件怎麼判斷"><a href="#if-else裡的條件怎麼判斷" class="headerlink" title="if-else裡的條件怎麼判斷?"></a>if-else裡的條件怎麼判斷?</h2><h3 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h3><h4 id="comparison-Operators"><a href="#comparison-Operators" class="headerlink" title="comparison Operators"></a>comparison Operators</h4><table>
+<thead>
+<tr>
+<th>C++ Notation</th>
+<th>中文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>等於</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等於</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小於</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小於等於</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大於</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大於等於</td>
+</tr>
+</tbody></table>
+<p>電腦會去看if裡面的條件是否成立，如果成立的話，會回傳true，不成立的時候則會回傳false。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    該條件成立後，會做什麼</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    該條件不成立，會做什麼</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>orange學長剛剛跟我說妳們一定還是看不懂:angry::angry::angry:，所以我決定直接舉例給大家看吧!</p>
+<p><strong>題目:</strong> 有兩整數變數big跟small，這兩個變數分別存放兩值3跟1，接下來我們拿這兩個變數來使用if-else</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> big=<span class="number">3</span>; </span><br><span class="line"><span class="comment">//宣告data type為整數，名稱為big的變數，並在此變數存放值3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> small=<span class="number">1</span>;</span><br><span class="line"><span class="comment">//宣告data type為整數，名稱為small的變數，並在此變數存放值1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(big&lt;small)&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>電腦在判斷條件 big&lt;small 結束後，會回傳false，<br><strong>至於為什麼回傳false?</strong><br>那是因為3比1還要大，因此big&lt;small的條件不成立。</p>
+<p>綜合上述那些</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(big&lt;small)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由 big&lt;small 得到false :point_down: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">false</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在電腦把條件判斷完後，會因為false而去執行else裡的程式碼，或是什麼都不做。</p>
+<h3 id="進階思維-條件判斷內發生指派會發生甚麼事-important"><a href="#進階思維-條件判斷內發生指派會發生甚麼事-important" class="headerlink" title="進階思維 - 條件判斷內發生指派會發生甚麼事? (important!)"></a>進階思維 - 條件判斷內發生指派會發生甚麼事? (important!)</h3><p>大家應該還記得之前說「=」在程式語言是指派的意思，而等於只會在條件判斷的時候出現，而在 C++ 裡，等於要用兩個等號，like this「==」。<br>對就是那個討人厭的表情符號 :no_good: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    string a = <span class="string">&quot;你是小明&quot;</span>, b = <span class="string">&quot;我是小華&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(a == b)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;我們一樣&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;我們不一樣&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>應該非常淺顯易懂，而你說為什麼，沒有為什麼，這是規定，所以把他記起來比較好。</p>
+<p>當然一定有人學不乖，會在條件判斷裡只放一個等號。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">if</span> (a = b)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;they\&#x27;re equal&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;they\&#x27;re not equal&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>當然跳脫程式語言的框架，<strong>直觀的話他會是等於，但要記得在 C++ 裡「=」就是指派，所以在第三行的這個判斷裡面，我反而是把 b 的值 assign 給 a，而這件事在程式裡永遠都是對的，因為沒有所謂的指派錯這種事，指派就是指派，所以這個條件永遠會成立</strong>，因此會印出<code>they&#39;re equal</code>，但這很明顯就是錯的，所以請謹記「＝=」才是用在比較的哦。</p>
+<h3 id="數字判斷"><a href="#數字判斷" class="headerlink" title="數字判斷"></a>數字判斷</h3><h4 id="if-0-、if-1-也可以判斷-該怎麼使用"><a href="#if-0-、if-1-也可以判斷-該怎麼使用" class="headerlink" title="if(0)、if(1)也可以判斷?該怎麼使用?"></a>if(0)、if(1)也可以判斷?該怎麼使用?</h4><p>if(0)裡面的0代表false<br>if(1)裡面的1代表true。<strong>其實不光是1，所有的正負數都可以</strong>。</p>
+<p>接著舉一個非常簡單的例子:point_down:</p>
+<p><strong>題目:</strong> 判斷該變數的值是否為0</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num;</span><br><span class="line"><span class="keyword">if</span>(num)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;num的值不是0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;num的值是0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>當num為0時，if(0) –&gt;if(false)</li>
+</ul>
+<p>電腦因此跑來執行else大括號裡的程式碼</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;num的值是0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出結果:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num的值是0</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>當num為非0的整數時，則會得到true<br>電腦會執行if大括號裡的程式碼<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(num)&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;num的值不是0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+輸出結果:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num的值不是0</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h1 id="布林值邏輯運算子"><a href="#布林值邏輯運算子" class="headerlink" title="布林值邏輯運算子"></a>布林值邏輯運算子</h1><h3 id="amp-amp-AND"><a href="#amp-amp-AND" class="headerlink" title="&amp;&amp; (AND)"></a>&amp;&amp; (AND)</h3><p><strong>以兩個條件為例</strong></p>
+<ul>
+<li>兩個條件都必須得到true才是true</li>
+<li>得到一個或0個true則為false</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>條件1</th>
+<th>條件2</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<ul>
+<li>在計概裡面這個其實就是真值表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>條件1</th>
+<th>條件2</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h3 id="OR"><a href="#OR" class="headerlink" title="|| (OR)"></a>|| (OR)</h3><p><strong>以兩個條件為例</strong></p>
+<ul>
+<li>只要一個或一個以上條件為true則得到true</li>
+<li>0個true則為false</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>條件1</th>
+<th>條件2</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>真值表<br>| 條件1 | 條件2 | 結果 |<br>| ——– | ——– | ——– |<br>| 1 | 1 | 1 |<br>| 1    | 0 | 1  |<br>| 0    | 1     | 1     |<br>| 0     | 0     | 0     |</p>
+<hr>
+<h4 id="用幾個字來分辨要使用-amp-amp-AND-OR-的時機"><a href="#用幾個字來分辨要使用-amp-amp-AND-OR-的時機" class="headerlink" title="用幾個字來分辨要使用 &amp;&amp;(AND) , ||(OR) 的時機"></a>用幾個字來分辨要使用 &amp;&amp;(AND) , ||(OR) 的時機</h4><p>當你看到「都是」、「且」 那就直接使用 &amp;&amp;<br>當你看到「任一個」、「或」那就直接使用 ||</p>
+<hr>
+<h4 id="AND-舉個例子-point-down"><a href="#AND-舉個例子-point-down" class="headerlink" title="(AND) 舉個例子 :point_down:"></a>(AND) 舉個例子 :point_down:</h4><p><strong>題目:</strong> 判斷兩變數 num1 , num2 是否都大於 0</p>
+<ul>
+<li>當num1,num2都大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">1</span>,num=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)&amp;&amp;(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;兩個都大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到true</span><br><span class="line">num2&gt;0 -&gt;得到true</span><br></pre></td></tr></table></figure>
+true &amp;&amp; true 得到 true，進到if裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">兩個都大於0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當num1,num2只有其中一個大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">1</span>,num=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)&amp;&amp;(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;兩個都大於0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;並沒有都大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到true</span><br><span class="line">num2&gt;0 -&gt;得到false</span><br></pre></td></tr></table></figure>
+true &amp;&amp; false 得到 false，進到else裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">並沒有都大於0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當num1,num2皆不大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">0</span>,num=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)&amp;&amp;(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;兩個都大於0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;並沒有都大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到false</span><br><span class="line">num2&gt;0 -&gt;得到false</span><br></pre></td></tr></table></figure>
+false &amp;&amp; false 得到 false，進到else裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">並沒有都大於0</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="OR-舉個例子-point-down"><a href="#OR-舉個例子-point-down" class="headerlink" title="(OR) 舉個例子 :point_down:"></a>(OR) 舉個例子 :point_down:</h4><p><strong>題目:</strong> 判斷兩變數num1,num2是否有任一變數大於0</p>
+<ul>
+<li>當num1,num2都大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">1</span>,num=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)||(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;任一或一個以上變數大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到true</span><br><span class="line">num2&gt;0 -&gt;得到true</span><br></pre></td></tr></table></figure>
+true || true 得到 true，進到if裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任一或一個以上變數大於0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當num1,num2只有其中一個大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">1</span>,num=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)||(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;任一或一個以上變數大於0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;都沒有大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到true</span><br><span class="line">num2&gt;0 -&gt;得到false</span><br></pre></td></tr></table></figure>
+true || false 得到 true，進到if裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任一或一個以上變數大於0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當num1,num2皆不大於0<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1=<span class="number">0</span>,num=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>((num1&gt;<span class="number">0</span>)||(num2&gt;<span class="number">0</span>))&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;任一或一個以上變數大於0&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;都沒有大於0&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num1&gt;0 -&gt;得到false</span><br><span class="line">num2&gt;0 -&gt;得到false</span><br></pre></td></tr></table></figure>
+false || false 得到 false，進到else裡面執行程式碼。</li>
+</ul>
+<p><strong>輸出:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">都沒有大於0</span><br></pre></td></tr></table></figure>
+
+
+
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://410735038.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 neOrangene</li>
+      <li><a href="https://410735038.github.io">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a target="_blank" rel="noopener" href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a target="_blank" rel="noopener" href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

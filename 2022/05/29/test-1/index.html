@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    int、double、float、char、bool 混在一起怎麼辦? | Orange
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  
+  ">
+  
+  <meta name="author" content="neOrangene">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/">Archives</a></li>
+        
+        
+        <li><a href="/">Categories</a></li>
+        
+        
+        <li><a href="/">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/"
+           class="header-toolbar-right"> 6 </a>
+      </li>
+      <li>
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+      <li>
+        <a href="/" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Orange</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    neOrangene
+
+    <span class="post-date float-right" title="{{moment(1653799148000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1653799148000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>int、double、float、char、bool 混在一起怎麼辦?</h1>
+    <h6 id="tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享"><a href="#tags-大一程設-東華大學-東華大學資管系-基本程式概念-資管經驗分享" class="headerlink" title="tags: 大一程設 東華大學 東華大學資管系 基本程式概念 資管經驗分享"></a>tags: <code>大一程設</code> <code>東華大學</code> <code>東華大學資管系</code> <code>基本程式概念</code> <code>資管經驗分享</code></h6><h1 id="int、double、float、char、bool-混在一起怎麼辦"><a href="#int、double、float、char、bool-混在一起怎麼辦" class="headerlink" title="int、double、float、char、bool 混在一起怎麼辦?"></a>int、double、float、char、bool 混在一起怎麼辦?</h1><p>[TOC]</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>程式語言提供許多工具讓設計師、開發者使用，不過你是不是正確的使用這些工具是很重要的，而前面有提到變數對設計師來說是最重要的工具之一，每一個變數都會有他代表的意義與型態(data type)，所以設定好正確的型態非常重要。</p>
+<p>這份筆記想傳達一些新手會常犯的錯誤，<strong>把資料型態不同的變數進行相加</strong>，這是會有一些大家想不到的結果的，<strong>所以要養成相同類型的變數才能做共同的處理的習慣</strong>。</p>
+<h2 id="int、double、float、char、bool-混在一起怎麼辦-1"><a href="#int、double、float、char、bool-混在一起怎麼辦-1" class="headerlink" title="int、double、float、char、bool 混在一起怎麼辦?"></a>int、double、float、char、bool 混在一起怎麼辦?</h2><p>話不多說，我們直接看程式碼。</p>
+<h3 id="double-float-v-s-int"><a href="#double-float-v-s-int" class="headerlink" title="double / float v.s. int"></a>double / float v.s. int</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">double</span> b = <span class="number">3.05</span>;</span><br><span class="line">    a = b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的例子會發生甚麼事? a 究竟是 3、3.05、還是 5?</p>
+<p>如果你看過前面的筆記，你一定不會說是 5，因為我們是把 b 變數的值指派給 a 變數，但因為 a 是整數型態的變數，所以只能存整數，因此答案是 3，可以得知，整數型態會自動捨去後面的小數位數。</p>
+<p>那 float 跟 double 都是浮點數，所以套用在這個情境也一樣哦。</p>
+<h3 id="char-v-s-int"><a href="#char-v-s-int" class="headerlink" title="char v.s. int"></a>char v.s. int</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> value = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; value &lt;&lt; endl; <span class="comment">//會印出 65</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> letter = <span class="number">65</span>;</span><br><span class="line">    cout &lt;&lt; letter &lt;&lt; endl; <span class="comment">//會印出 A</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你猜猜答這兩個值分別會是多少?</p>
+<p>你可能會疑問，你不是說 int 存整數變數嗎，為什麼可以存字元 A，你在騙我對不對?</p>
+<h3 id="科普小知識-ASCII"><a href="#科普小知識-ASCII" class="headerlink" title="科普小知識 - ASCII"></a>科普小知識 - ASCII</h3><p>其實這跟<strong>計算機概論</strong>有關，在電腦的世界裡有一種編碼系統稱為 ASCII，當初電腦在外國創立的時候只能存英文，他們那時候哪知道怎麼存中文，然後 ASCII 總共只能存 128 個字母，因為總共只有 8 bits，只能用 0~127 來代表他們想表達的字。</p>
+<p>ASCII 用注音來表示的話我們會發 「阿 斯 ㄎ一   code」，預防以後老師提到你們不知道這是啥，<del>我秀個下限</del>。</p>
+<p>你可能看不太懂，先來看看維基百科。<br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ASCII">ASCII</a></p>
+<p>所以你可以發現在 2 進制底下的 65 被規定為大寫的 A，而其他的字母也有相對應的表達，所以這就是為什麼在 C++ 裡會印出 65 的原因。</p>
+<p>而隨著技術的演進，電腦編碼系統也越來越多，當然你現在能在任何的電腦系統看到中文字，也是在後來被編進編碼系統裡面，而中文最令人熟知的就是 「big-5」，也就是我們俗稱的「大五碼」</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%A7%E4%BA%94%E7%A2%BC">big5 - wiki</a></p>
+<p>至於剩下的內容我不多說，詳細請左轉計概。</p>
+<p>所以同理，為什麼 letter 會印出 A，你們應該也可想而知了，同樣也是因為 ASCII。</p>
+<h3 id="bool-v-s-int"><a href="#bool-v-s-int" class="headerlink" title="bool v.s. int"></a>bool v.s. int</h3><p>這個在當初介紹 bool 的時候介紹過了，可以去看第二章 ppt 的第 48 頁。</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://410735038.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 neOrangene</li>
+      <li><a href="https://410735038.github.io">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a target="_blank" rel="noopener" href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a target="_blank" rel="noopener" href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
